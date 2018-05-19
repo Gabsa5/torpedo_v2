@@ -43,7 +43,7 @@ public class MenuView {
 		
 		menuBox = new VBox(10,
 				new MenuItem("SinglePlayer"),
-				new MenuItem("MultiPlayer"),
+				new MenuItem("MultiPlayer Client"),
 				itemExit);
 		menuBox.setAlignment(Pos.TOP_CENTER);
 		menuBox.setTranslateX(350);
@@ -81,11 +81,11 @@ public class MenuView {
     			case "SinglePlayer":
 					controller.start(s, GameType.SINGLEPLAYER);
     				break;
-    			case "Multiplayer":
-					controller.start(s, GameType.SERVER);
+    			case "MultiPlayer Client":
+					controller.start(s, GameType.CLIENT);
     				break;
     			}
-    			// TODO: MULTIPLAYER CLIENT
+    			// TODO: MULTIPLAYER SERVER
     		});
     	}
     	
