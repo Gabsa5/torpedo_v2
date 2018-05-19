@@ -1,5 +1,6 @@
 package game;
 
+import AI.BattleshipAI;
 import game.Game;
 import game.Ship;
 import game.Player;
@@ -31,6 +32,16 @@ public class Main extends Application {
 
 	
 	public static void main(String[] args) {
+
+//		Board board = new Board(10);
+//
+//		BattleshipAI battleshipAI = new BattleshipAI(board);
+//
+//		battleshipAI.addRandomShip(5);
+//
+//		board.prettyPrint();
+
+
 		launch(args);
 		// TODO Auto-generated method stub
 

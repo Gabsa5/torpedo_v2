@@ -6,6 +6,7 @@ import game.Ship;
 import java.awt.Insets;
 import java.util.ArrayList;
 
+import game.SinglePlayer;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -25,8 +26,8 @@ import javafx.scene.input.*;
 
 
 public class GameView {
-	
-	private Controller controller;
+	private SinglePlayer singlePlayer;
+
 	private Stage stage;
 	private Pane root;
 	private Board myBoard;
@@ -42,14 +43,13 @@ public class GameView {
 	private double nextShipY = 360;
 	private ArrayList<Rectangle> cellRects = new ArrayList<>();
 	private ArrayList<Rectangle> ships = new ArrayList<>();
-	private boolean isDragged = false;
 	private Button startGameButton;
 
 	private String newLine = System.getProperty("line.separator");
 	
-	public GameView(Stage s, Controller controller) {
+	public GameView(Stage s, SinglePlayer singlePlayer) {
 		this.stage = s;
-		this.controller = controller;
+		this.singlePlayer = singlePlayer;
 	}
 
 
@@ -188,7 +188,7 @@ public class GameView {
 				shipList.add(newShip);
 				ship.setDisable(true);
 			}
-			controller.afterShipSelection(shipList);
+			singlePlayer.afterShipSelection(shipList);
 			root.getChildren().remove(startGameButton);
 		});
 		
@@ -212,7 +212,6 @@ public class GameView {
 		ship.setOnMouseDragged(new EventHandler <MouseEvent>() {
 			public void handle(MouseEvent e) {
 				if (e.isPrimaryButtonDown()) {
-					isDragged = true;
 					double pressedX = e.getSceneX();
 					double pressedY = e.getSceneY();
 					double posX = pressedX - offsetX;

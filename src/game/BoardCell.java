@@ -4,18 +4,12 @@ public class BoardCell {
 	
 	//Properties of BoardCell
 	private int cellIndex;
-	private boolean isEmptyCell;
 	private boolean isShootedCell;
-	private int shipIndex;
-	
-	//Constructor
-	public BoardCell(){
-		
-	}
+	private ShipPart shipPart;
+
 	
 	public BoardCell(int cellIndex){
 		this.cellIndex=cellIndex;
-		this.setIsEmptyCell(true);
 		this.setIsShootedCell(false);	
 	}
 	
@@ -34,12 +28,7 @@ public class BoardCell {
 
 	//Getter for isEmptyCell
 	public boolean getIsEmptyCell() {
-		return isEmptyCell;
-	}
-
-	//Setter for isEmptyCell
-	public void setIsEmptyCell(boolean isEmptyCell) {
-		this.isEmptyCell = isEmptyCell;
+		return this.shipPart == null;
 	}
 	
 	//Getter for isShootedCell
@@ -52,13 +41,11 @@ public class BoardCell {
 		this.isShootedCell = isShootedCell;
 	}
 
-	//Getter for shipIndex
-	public int getShipIndex() {
-		return shipIndex;
+	public ShipPart getShipPart() {
+		return shipPart;
 	}
-	
-	//Setter for shipIndex
-	public void setShipIndex(int shipIndex) {
-		this.shipIndex = shipIndex;
+
+	public void setShipPart(ShipPart shipPart) {
+		this.shipPart = shipPart;
 	}
 }

@@ -5,13 +5,10 @@ public class ShipPart {
 	//Properties of ShipPart
 	private boolean isUnshooted;
 	private int shipPartIndex;
+	private Ship ship;
 	
-	//Constructor for ShipPart
-	public ShipPart(){
-		
-	}
-	
-	public ShipPart(int shipPartIndex){
+	public ShipPart(Ship ship, int shipPartIndex){
+		this.ship = ship;
 		this.shipPartIndex=shipPartIndex;
 		this.isUnshooted=true;
 	}
@@ -35,5 +32,8 @@ public class ShipPart {
 	public void setIsUnshooted(boolean isUnshooted) {
 		this.isUnshooted = isUnshooted;
 	}
-	
+
+	public Ship getShip() {
+		return ship;
+	}
 }

@@ -75,16 +75,17 @@ public class MenuView {
     		setActive(false);
     		setOnActivate(() -> {
     			System.out.println(name + " activated");
+
+				Controller controller = new Controller();
     			switch(name) {
     			case "SinglePlayer":
-    				Controller c = new Controller(s);
-    				c.start();
+					controller.start(s, GameType.SINGLEPLAYER);
     				break;
     			case "Multiplayer":
-    				Controller c2 = new Controller(s);
-    				c2.start();
+					controller.start(s, GameType.SERVER);
     				break;
     			}
+    			// TODO: MULTIPLAYER CLIENT
     		});
     	}
     	

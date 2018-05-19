@@ -17,11 +17,6 @@ public class Ship {
 	private int shipSize;
 	private ArrayList<ShipPart> shipParts;
 	
-	//Constructor
-	public Ship(){
-		
-	}
-	
 	public Ship(int shipStartIndex, int shipEndIndex){
 		this.shipStartIndex =shipStartIndex;
 		this.shipEndIndex = shipEndIndex;
@@ -60,11 +55,11 @@ public class Ship {
 	
 	//Setter for shipParts
 	public void setShipParts() {
-		this.shipParts = new ArrayList<ShipPart>();
+		this.shipParts = new ArrayList<>();
 		for(int i=0; i<this.shipSizeDiff%10+1; i++){
 			
 			for(int j=0; j<this.shipSizeDiff/10+1; j++){
-				this.shipParts.add(new ShipPart(shipStartIndex+i+j*10));
+				this.shipParts.add(new ShipPart(this, shipStartIndex+i+j*10));
 			}		
 		}
 	}
@@ -101,7 +96,7 @@ public class Ship {
 	}
 
 	//Gives back the number of the healthy parts of the ship 
-	public int UnshootedParts() {
+	public int unshootedParts() {
 		int unshootedParts = 0;
 		for(int i=0; i<this.shipSize; i++)
 		{
@@ -113,7 +108,7 @@ public class Ship {
 	
 	public boolean isDead(){
 		boolean deadShip=false;
-		if(this.UnshootedParts()==0)
+		if(this.unshootedParts()==0)
 			deadShip = true;
 		return deadShip;
 	}

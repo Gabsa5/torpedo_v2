@@ -1,52 +1,59 @@
 package gui;
 
-import javafx.scene.shape.Rectangle;
+import game.AIPlayer;
+import game.Game;
+import game.MultiPlayer;
+import game.Player;
+import game.SinglePlayer;
 import javafx.stage.Stage;
 
-import java.util.ArrayList;
-
-import game.Game;
-import game.Ship;
-import gui.GameType;
-import gui.GameView;
-
 public class Controller {
-	
-	private Stage s;
-	private GameType gameType;
-	private GameView gameView;
 	private Game game;
-	
-	
-	public Controller(Stage s) {
-		this.s = s;
-		gameType = GameType.SINGLEPLAYER;
+	private SinglePlayer singlePlayer;
+	private Player otherPlayer;
 
-		
-	}
-	
-	public void start() {
-		gameView = new GameView(s, this);
-		try {
-			gameView.build();
-			gameView.createUnPlacedShip(2);
-			gameView.createUnPlacedShip(2);
-			gameView.createUnPlacedShip(3);
-			gameView.createUnPlacedShip(3);
-			gameView.createUnPlacedShip(4);
-			gameView.createUnPlacedShip(5);
-		}catch (Exception e) {
-			e.printStackTrace();
+	public void start(Stage stage, GameType gameType) {
+		this.game = new Game(10);
+		this.singlePlayer = new SinglePlayer(stage);
+		switch (gameType) {
+			case SINGLEPLAYER:
+				otherPlayer = new AIPlayer();
+				break;
+			case SERVER:
+				otherPlayer = new MultiPlayer();
+				break;
+			case CLIENT:
+				otherPlayer = new MultiPlayer();
+				break;
 		}
-		switch(gameType) {
-		case SINGLEPLAYER:
-			
-		}
-	}
-	
-	public void afterShipSelection(ArrayList<Ship> ships) {
-		Game game = new Game(10, false);
-		game.getPlayers().get(0).getPlayerBoard().getShips().addAll(ships);
+
+		singlePlayer.placeShips(game.getMyBoard());
+		otherPlayer.placeShips(game.getOtherBoard());
+
+		Thread thread = new Thread(() -> {
+
+			// Wait while players place ships
+			while(true) {
+				if (singlePlayer.isReadyWithPlaceShips() && otherPlayer.isReadyWithPlaceShips()) {
+					break;
+				}
+				try {
+					Thread.sleep(5000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+
+			System.out.println("Single Player Board:");
+			this.game.getMyBoard().prettyPrint();
+
+			System.out.println("Other Player Board:");
+			this.game.getOtherBoard().prettyPrint();
+
+			// TODO: Start shooting part
+		});
+
+		thread.start();
 	}
 
 }

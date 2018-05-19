@@ -1,47 +1,50 @@
 package AI;
+
 import java.util.Random;
 
+import game.Board;
+import game.Ship;
+
 public class BattleshipAI {
-	private int rowSize;
-	private int tableLength;
-	private int[] board;
 	private Random rand = new Random();
+	private Board board;
+	private int[] boardArray;
 
-	public BattleshipAI(int rowSize) {
-		this.rowSize = rowSize;
-		this.tableLength = rowSize*rowSize - 1;
-		this.resetBoard();
+	public BattleshipAI(Board board) {
+		this.board = board;
+		boardArray = new int[board.getBoardSizeSQ()];
 	}
 
-	public void resetBoard() {
-		this.board = new int[rowSize*rowSize];
-	}
-
-	public void randomShips(int shipSize){
+	public void addRandomShip(int shipSize) {
 		boolean direct = rand.nextBoolean();
 		int tryNumber = 0;
-		while(true) {
+		while (true) {
+			int startPoint;
+			int endpoint;
 			int resBefore = this.nonZeroNum();
-			int[] tempBoard = this.board.clone();
-			if (direct){
-				int startPoint = (rand.nextInt(this.rowSize-1) * rowSize + rand.nextInt(this.rowSize-shipSize));
-				for(int j = 0; j < shipSize; j++) {
-					tempBoard[startPoint+j] = 1;
+			int[] tempBoard = this.boardArray.clone();
+			if (direct) {
+				startPoint = (rand.nextInt(this.board.getBoardSize() - 1) * this.board.getBoardSize() + rand.nextInt(this.board.getBoardSize() - shipSize));
+				endpoint = startPoint + (shipSize - 1);
+				for (int j = 0; j < shipSize; j++) {
+					tempBoard[startPoint + j] = 1;
+				}
+			} else {
+				startPoint = (rand.nextInt((this.board.getBoardSizeSQ() - 1) - (shipSize - 1) * this.board.getBoardSize()));
+				endpoint = startPoint + (shipSize - 1) * this.board.getBoardSize();
+				for (int j = 0; j < shipSize; j++) {
+					tempBoard[startPoint + j * this.board.getBoardSize()] = 1;
 				}
 			}
-			else {
-				int startPoint = (rand.nextInt(this.tableLength-(shipSize-1)*this.rowSize));
-				for(int j = 0; j < shipSize; j++) {
-					tempBoard[startPoint+j*rowSize] = 1;
-				}
-			}
-			if ((this.nonZeroNum(tempBoard)-resBefore) == shipSize) {
-				this.board = tempBoard;
+			if ((this.nonZeroNum(tempBoard) - resBefore) == shipSize) {
+				this.boardArray = tempBoard;
+				board.addShip(startPoint, endpoint);
 				break;
 			}
 
 			tryNumber++;
-			if(tryNumber > 100) {
+			if (tryNumber > 100) {
+				System.out.println("Cannot place the ship in 100 steps");
 				break;
 			}
 		}
@@ -50,9 +53,9 @@ public class BattleshipAI {
 
 	private int nonZeroNum(int[] table) {
 		int nonzeroNum = 0;
-		for ( int element : table) {
+		for (int element : table) {
 			if (element != 0) {
-				nonzeroNum ++;
+				nonzeroNum++;
 			}
 		}
 		return nonzeroNum;
@@ -60,21 +63,12 @@ public class BattleshipAI {
 
 	private int nonZeroNum() {
 		int nonzeroNum = 0;
-		for ( int element : this.board) {
+		for (int element : this.boardArray) {
 			if (element != 0) {
-				nonzeroNum ++;
+				nonzeroNum++;
 			}
 		}
 		return nonzeroNum;
-	}
-
-	public void prettyPrint() {
-		for (int j = 0; j < rowSize; j++) {
-			for (int i = 1; i <= rowSize; i++) {
-				System.out.print(board[j*rowSize+i-1] + " ");
-			}
-			System.out.println();
-		}
 	}
 
 }

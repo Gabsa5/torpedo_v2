@@ -10,10 +10,6 @@ public class Board {
 	private ArrayList<Ship> ships;
 
 	//Constructor
-	public Board(){
-		
-	}
-	
 	public Board(int boardSize){
 		this.boardSize=boardSize;
 		this.setBoardSizeSQ();
@@ -76,12 +72,12 @@ public class Board {
 	
 	//Add ship to the board
 	public void addShip(int shipStartIndex, int shipEndIndex){
-		ships.add(new Ship(shipStartIndex, shipEndIndex));
-		Ship actualShip = this.ships.get(this.ships.size()-1);
-		for(int i=0; i<actualShip.getShipSize();i++){
-			BoardCell actualCell=this.cells.get(actualShip.getShipParts().get(i).getShipPartIndex());
-			actualCell.setIsEmptyCell(false);
-			actualCell.setShipIndex(ships.indexOf(actualShip));
+		Ship actualShip = new Ship(shipStartIndex, shipEndIndex);
+		ships.add(actualShip);
+		for(int i=0; i<actualShip.getShipSize(); i++){
+			ShipPart shipPart = actualShip.getShipParts().get(i);
+			BoardCell actualCell=this.cells.get(shipPart.getShipPartIndex());
+			actualCell.setShipPart(shipPart);
 		}
 	}
 	
@@ -96,5 +92,24 @@ public class Board {
 		else{
 			System.out.println("Talált!");
 			}
+	}
+
+	public void prettyPrint() {
+		for (int j = 0; j < boardSize; j++) {
+			for (int i = 1; i <= boardSize; i++) {
+				BoardCell cell = cells.get(j * boardSize + i - 1);
+				if (cell.getIsEmptyCell() && !cell.getIsShootedCell()) {
+					System.out.print("0");
+				} else if (!cell.getIsEmptyCell() && !cell.getIsShootedCell()) {
+					System.out.print(cell.getShipPart().getShip().getShipSize());
+				} else if (!cell.getIsEmptyCell() && cell.getIsShootedCell()) {
+					System.out.print("X");
+				} else {
+					System.out.print("U");
+				}
+				System.out.print(" ");
+			}
+			System.out.println();
+		}
 	}
 }
