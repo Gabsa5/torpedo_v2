@@ -1,0 +1,1050 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="10.0.1" class="java.beans.XMLDecoder">
+ <object class="game.Board">
+  <void property="boardSize">
+   <int>10</int>
+  </void>
+  <void property="boardSizeSQ">
+   <int>100</int>
+  </void>
+  <void property="cells">
+   <object class="java.util.ArrayList">
+    <void method="add">
+     <object class="game.BoardCell">
+      <void property="isEmptyCell">
+       <boolean>true</boolean>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="game.BoardCell">
+      <void property="cellIndex">
+       <int>1</int>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="game.BoardCell">
+      <void property="cellIndex">
+       <int>2</int>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="game.BoardCell">
+      <void property="cellIndex">
+       <int>3</int>
+      </void>
+      <void property="isEmptyCell">
+       <boolean>true</boolean>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="game.BoardCell">
+      <void property="cellIndex">
+       <int>4</int>
+      </void>
+      <void property="isEmptyCell">
+       <boolean>true</boolean>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="game.BoardCell">
+      <void property="cellIndex">
+       <int>5</int>
+      </void>
+      <void property="isEmptyCell">
+       <boolean>true</boolean>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="game.BoardCell">
+      <void property="cellIndex">
+       <int>6</int>
+      </void>
+      <void property="isEmptyCell">
+       <boolean>true</boolean>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="game.BoardCell">
+      <void property="cellIndex">
+       <int>7</int>
+      </void>
+      <void property="isEmptyCell">
+       <boolean>true</boolean>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="game.BoardCell">
+      <void property="cellIndex">
+       <int>8</int>
+      </void>
+      <void property="isEmptyCell">
+       <boolean>true</boolean>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="game.BoardCell">
+      <void property="cellIndex">
+       <int>9</int>
+      </void>
+      <void property="isEmptyCell">
+       <boolean>true</boolean>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="game.BoardCell">
+      <void property="cellIndex">
+       <int>10</int>
+      </void>
+      <void property="isEmptyCell">
+       <boolean>true</boolean>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="game.BoardCell">
+      <void property="cellIndex">
+       <int>11</int>
+      </void>
+      <void property="isEmptyCell">
+       <boolean>true</boolean>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="game.BoardCell">
+      <void property="cellIndex">
+       <int>12</int>
+      </void>
+      <void property="isEmptyCell">
+       <boolean>true</boolean>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="game.BoardCell">
+      <void property="cellIndex">
+       <int>13</int>
+      </void>
+      <void property="isEmptyCell">
+       <boolean>true</boolean>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="game.BoardCell">
+      <void property="cellIndex">
+       <int>14</int>
+      </void>
+      <void property="isEmptyCell">
+       <boolean>true</boolean>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="game.BoardCell">
+      <void property="cellIndex">
+       <int>15</int>
+      </void>
+      <void property="isEmptyCell">
+       <boolean>true</boolean>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="game.BoardCell">
+      <void property="cellIndex">
+       <int>16</int>
+      </void>
+      <void property="isEmptyCell">
+       <boolean>true</boolean>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="game.BoardCell">
+      <void property="cellIndex">
+       <int>17</int>
+      </void>
+      <void property="isEmptyCell">
+       <boolean>true</boolean>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="game.BoardCell">
+      <void property="cellIndex">
+       <int>18</int>
+      </void>
+      <void property="isEmptyCell">
+       <boolean>true</boolean>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="game.BoardCell">
+      <void property="cellIndex">
+       <int>19</int>
+      </void>
+      <void property="isEmptyCell">
+       <boolean>true</boolean>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="game.BoardCell">
+      <void property="cellIndex">
+       <int>20</int>
+      </void>
+      <void property="isEmptyCell">
+       <boolean>true</boolean>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="game.BoardCell">
+      <void property="cellIndex">
+       <int>21</int>
+      </void>
+      <void property="isEmptyCell">
+       <boolean>true</boolean>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="game.BoardCell">
+      <void property="cellIndex">
+       <int>22</int>
+      </void>
+      <void property="isEmptyCell">
+       <boolean>true</boolean>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="game.BoardCell">
+      <void property="cellIndex">
+       <int>23</int>
+      </void>
+      <void property="isEmptyCell">
+       <boolean>true</boolean>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="game.BoardCell">
+      <void property="cellIndex">
+       <int>24</int>
+      </void>
+      <void property="isEmptyCell">
+       <boolean>true</boolean>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="game.BoardCell">
+      <void property="cellIndex">
+       <int>25</int>
+      </void>
+      <void property="isEmptyCell">
+       <boolean>true</boolean>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="game.BoardCell">
+      <void property="cellIndex">
+       <int>26</int>
+      </void>
+      <void property="isEmptyCell">
+       <boolean>true</boolean>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="game.BoardCell">
+      <void property="cellIndex">
+       <int>27</int>
+      </void>
+      <void property="isEmptyCell">
+       <boolean>true</boolean>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="game.BoardCell">
+      <void property="cellIndex">
+       <int>28</int>
+      </void>
+      <void property="isEmptyCell">
+       <boolean>true</boolean>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="game.BoardCell">
+      <void property="cellIndex">
+       <int>29</int>
+      </void>
+      <void property="isEmptyCell">
+       <boolean>true</boolean>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="game.BoardCell">
+      <void property="cellIndex">
+       <int>30</int>
+      </void>
+      <void property="isEmptyCell">
+       <boolean>true</boolean>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="game.BoardCell">
+      <void property="cellIndex">
+       <int>31</int>
+      </void>
+      <void property="isEmptyCell">
+       <boolean>true</boolean>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="game.BoardCell">
+      <void property="cellIndex">
+       <int>32</int>
+      </void>
+      <void property="isEmptyCell">
+       <boolean>true</boolean>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="game.BoardCell">
+      <void property="cellIndex">
+       <int>33</int>
+      </void>
+      <void property="isEmptyCell">
+       <boolean>true</boolean>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="game.BoardCell">
+      <void property="cellIndex">
+       <int>34</int>
+      </void>
+      <void property="isEmptyCell">
+       <boolean>true</boolean>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="game.BoardCell">
+      <void property="cellIndex">
+       <int>35</int>
+      </void>
+      <void property="isEmptyCell">
+       <boolean>true</boolean>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="game.BoardCell">
+      <void property="cellIndex">
+       <int>36</int>
+      </void>
+      <void property="isEmptyCell">
+       <boolean>true</boolean>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="game.BoardCell">
+      <void property="cellIndex">
+       <int>37</int>
+      </void>
+      <void property="isEmptyCell">
+       <boolean>true</boolean>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="game.BoardCell">
+      <void property="cellIndex">
+       <int>38</int>
+      </void>
+      <void property="isEmptyCell">
+       <boolean>true</boolean>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="game.BoardCell">
+      <void property="cellIndex">
+       <int>39</int>
+      </void>
+      <void property="isEmptyCell">
+       <boolean>true</boolean>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="game.BoardCell">
+      <void property="cellIndex">
+       <int>40</int>
+      </void>
+      <void property="isEmptyCell">
+       <boolean>true</boolean>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="game.BoardCell">
+      <void property="cellIndex">
+       <int>41</int>
+      </void>
+      <void property="isEmptyCell">
+       <boolean>true</boolean>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="game.BoardCell">
+      <void property="cellIndex">
+       <int>42</int>
+      </void>
+      <void property="isEmptyCell">
+       <boolean>true</boolean>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="game.BoardCell">
+      <void property="cellIndex">
+       <int>43</int>
+      </void>
+      <void property="isEmptyCell">
+       <boolean>true</boolean>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="game.BoardCell">
+      <void property="cellIndex">
+       <int>44</int>
+      </void>
+      <void property="isEmptyCell">
+       <boolean>true</boolean>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="game.BoardCell">
+      <void property="cellIndex">
+       <int>45</int>
+      </void>
+      <void property="isEmptyCell">
+       <boolean>true</boolean>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="game.BoardCell">
+      <void property="cellIndex">
+       <int>46</int>
+      </void>
+      <void property="isEmptyCell">
+       <boolean>true</boolean>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="game.BoardCell">
+      <void property="cellIndex">
+       <int>47</int>
+      </void>
+      <void property="isEmptyCell">
+       <boolean>true</boolean>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="game.BoardCell">
+      <void property="cellIndex">
+       <int>48</int>
+      </void>
+      <void property="isEmptyCell">
+       <boolean>true</boolean>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="game.BoardCell">
+      <void property="cellIndex">
+       <int>49</int>
+      </void>
+      <void property="isEmptyCell">
+       <boolean>true</boolean>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="game.BoardCell">
+      <void property="cellIndex">
+       <int>50</int>
+      </void>
+      <void property="isEmptyCell">
+       <boolean>true</boolean>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="game.BoardCell">
+      <void property="cellIndex">
+       <int>51</int>
+      </void>
+      <void property="isEmptyCell">
+       <boolean>true</boolean>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="game.BoardCell">
+      <void property="cellIndex">
+       <int>52</int>
+      </void>
+      <void property="isEmptyCell">
+       <boolean>true</boolean>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="game.BoardCell">
+      <void property="cellIndex">
+       <int>53</int>
+      </void>
+      <void property="isEmptyCell">
+       <boolean>true</boolean>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="game.BoardCell">
+      <void property="cellIndex">
+       <int>54</int>
+      </void>
+      <void property="isEmptyCell">
+       <boolean>true</boolean>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="game.BoardCell">
+      <void property="cellIndex">
+       <int>55</int>
+      </void>
+      <void property="isEmptyCell">
+       <boolean>true</boolean>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="game.BoardCell">
+      <void property="cellIndex">
+       <int>56</int>
+      </void>
+      <void property="isEmptyCell">
+       <boolean>true</boolean>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="game.BoardCell">
+      <void property="cellIndex">
+       <int>57</int>
+      </void>
+      <void property="isEmptyCell">
+       <boolean>true</boolean>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="game.BoardCell">
+      <void property="cellIndex">
+       <int>58</int>
+      </void>
+      <void property="isEmptyCell">
+       <boolean>true</boolean>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="game.BoardCell">
+      <void property="cellIndex">
+       <int>59</int>
+      </void>
+      <void property="isEmptyCell">
+       <boolean>true</boolean>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="game.BoardCell">
+      <void property="cellIndex">
+       <int>60</int>
+      </void>
+      <void property="isEmptyCell">
+       <boolean>true</boolean>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="game.BoardCell">
+      <void property="cellIndex">
+       <int>61</int>
+      </void>
+      <void property="isEmptyCell">
+       <boolean>true</boolean>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="game.BoardCell">
+      <void property="cellIndex">
+       <int>62</int>
+      </void>
+      <void property="isEmptyCell">
+       <boolean>true</boolean>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="game.BoardCell">
+      <void property="cellIndex">
+       <int>63</int>
+      </void>
+      <void property="isEmptyCell">
+       <boolean>true</boolean>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="game.BoardCell">
+      <void property="cellIndex">
+       <int>64</int>
+      </void>
+      <void property="isEmptyCell">
+       <boolean>true</boolean>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="game.BoardCell">
+      <void property="cellIndex">
+       <int>65</int>
+      </void>
+      <void property="isEmptyCell">
+       <boolean>true</boolean>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="game.BoardCell">
+      <void property="cellIndex">
+       <int>66</int>
+      </void>
+      <void property="isEmptyCell">
+       <boolean>true</boolean>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="game.BoardCell">
+      <void property="cellIndex">
+       <int>67</int>
+      </void>
+      <void property="isEmptyCell">
+       <boolean>true</boolean>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="game.BoardCell">
+      <void property="cellIndex">
+       <int>68</int>
+      </void>
+      <void property="isEmptyCell">
+       <boolean>true</boolean>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="game.BoardCell">
+      <void property="cellIndex">
+       <int>69</int>
+      </void>
+      <void property="isEmptyCell">
+       <boolean>true</boolean>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="game.BoardCell">
+      <void property="cellIndex">
+       <int>70</int>
+      </void>
+      <void property="isEmptyCell">
+       <boolean>true</boolean>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="game.BoardCell">
+      <void property="cellIndex">
+       <int>71</int>
+      </void>
+      <void property="isEmptyCell">
+       <boolean>true</boolean>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="game.BoardCell">
+      <void property="cellIndex">
+       <int>72</int>
+      </void>
+      <void property="isEmptyCell">
+       <boolean>true</boolean>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="game.BoardCell">
+      <void property="cellIndex">
+       <int>73</int>
+      </void>
+      <void property="isEmptyCell">
+       <boolean>true</boolean>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="game.BoardCell">
+      <void property="cellIndex">
+       <int>74</int>
+      </void>
+      <void property="isEmptyCell">
+       <boolean>true</boolean>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="game.BoardCell">
+      <void property="cellIndex">
+       <int>75</int>
+      </void>
+      <void property="isEmptyCell">
+       <boolean>true</boolean>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="game.BoardCell">
+      <void property="cellIndex">
+       <int>76</int>
+      </void>
+      <void property="isEmptyCell">
+       <boolean>true</boolean>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="game.BoardCell">
+      <void property="cellIndex">
+       <int>77</int>
+      </void>
+      <void property="isEmptyCell">
+       <boolean>true</boolean>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="game.BoardCell">
+      <void property="cellIndex">
+       <int>78</int>
+      </void>
+      <void property="isEmptyCell">
+       <boolean>true</boolean>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="game.BoardCell">
+      <void property="cellIndex">
+       <int>79</int>
+      </void>
+      <void property="isEmptyCell">
+       <boolean>true</boolean>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="game.BoardCell">
+      <void property="cellIndex">
+       <int>80</int>
+      </void>
+      <void property="isEmptyCell">
+       <boolean>true</boolean>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="game.BoardCell">
+      <void property="cellIndex">
+       <int>81</int>
+      </void>
+      <void property="isEmptyCell">
+       <boolean>true</boolean>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="game.BoardCell">
+      <void property="cellIndex">
+       <int>82</int>
+      </void>
+      <void property="isEmptyCell">
+       <boolean>true</boolean>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="game.BoardCell">
+      <void property="cellIndex">
+       <int>83</int>
+      </void>
+      <void property="isEmptyCell">
+       <boolean>true</boolean>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="game.BoardCell">
+      <void property="cellIndex">
+       <int>84</int>
+      </void>
+      <void property="isEmptyCell">
+       <boolean>true</boolean>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="game.BoardCell">
+      <void property="cellIndex">
+       <int>85</int>
+      </void>
+      <void property="isEmptyCell">
+       <boolean>true</boolean>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="game.BoardCell">
+      <void property="cellIndex">
+       <int>86</int>
+      </void>
+      <void property="isEmptyCell">
+       <boolean>true</boolean>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="game.BoardCell">
+      <void property="cellIndex">
+       <int>87</int>
+      </void>
+      <void property="isEmptyCell">
+       <boolean>true</boolean>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="game.BoardCell">
+      <void property="cellIndex">
+       <int>88</int>
+      </void>
+      <void property="isEmptyCell">
+       <boolean>true</boolean>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="game.BoardCell">
+      <void property="cellIndex">
+       <int>89</int>
+      </void>
+      <void property="isEmptyCell">
+       <boolean>true</boolean>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="game.BoardCell">
+      <void property="cellIndex">
+       <int>90</int>
+      </void>
+      <void property="isEmptyCell">
+       <boolean>true</boolean>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="game.BoardCell">
+      <void property="cellIndex">
+       <int>91</int>
+      </void>
+      <void property="isEmptyCell">
+       <boolean>true</boolean>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="game.BoardCell">
+      <void property="cellIndex">
+       <int>92</int>
+      </void>
+      <void property="isEmptyCell">
+       <boolean>true</boolean>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="game.BoardCell">
+      <void property="cellIndex">
+       <int>93</int>
+      </void>
+      <void property="isEmptyCell">
+       <boolean>true</boolean>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="game.BoardCell">
+      <void property="cellIndex">
+       <int>94</int>
+      </void>
+      <void property="isEmptyCell">
+       <boolean>true</boolean>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="game.BoardCell">
+      <void property="cellIndex">
+       <int>95</int>
+      </void>
+      <void property="isEmptyCell">
+       <boolean>true</boolean>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="game.BoardCell">
+      <void property="cellIndex">
+       <int>96</int>
+      </void>
+      <void property="isEmptyCell">
+       <boolean>true</boolean>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="game.BoardCell">
+      <void property="cellIndex">
+       <int>97</int>
+      </void>
+      <void property="isEmptyCell">
+       <boolean>true</boolean>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="game.BoardCell">
+      <void property="cellIndex">
+       <int>98</int>
+      </void>
+      <void property="isEmptyCell">
+       <boolean>true</boolean>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="game.BoardCell">
+      <void property="cellIndex">
+       <int>99</int>
+      </void>
+      <void property="isEmptyCell">
+       <boolean>true</boolean>
+      </void>
+     </object>
+    </void>
+   </object>
+  </void>
+  <void property="ships">
+   <object class="java.util.ArrayList">
+    <void method="add">
+     <object class="game.Ship">
+      <void property="shipEndIndex">
+       <int>2</int>
+      </void>
+      <void property="shipParts">
+       <object class="java.util.ArrayList">
+        <void method="add">
+         <object class="game.ShipPart">
+          <void property="isUnshooted">
+           <boolean>true</boolean>
+          </void>
+          <void property="shipPartIndex">
+           <int>1</int>
+          </void>
+         </object>
+        </void>
+        <void method="add">
+         <object class="game.ShipPart">
+          <void property="isUnshooted">
+           <boolean>true</boolean>
+          </void>
+          <void property="shipPartIndex">
+           <int>2</int>
+          </void>
+         </object>
+        </void>
+       </object>
+      </void>
+      <void property="shipSize">
+       <int>2</int>
+      </void>
+      <void property="shipSizeDiff">
+       <int>1</int>
+      </void>
+      <void property="shipStartIndex">
+       <int>1</int>
+      </void>
+     </object>
+    </void>
+   </object>
+  </void>
+ </object>
+</java>

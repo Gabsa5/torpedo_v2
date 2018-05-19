@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="10.0.1" class="java.beans.XMLDecoder">
+ <object class="game.Ship">
+  <void property="shipEndIndex">
+   <int>6</int>
+  </void>
+  <void property="shipParts">
+   <object class="java.util.ArrayList">
+    <void method="add">
+     <object class="game.ShipPart">
+      <void property="isUnshooted">
+       <boolean>true</boolean>
+      </void>
+      <void property="shipPartIndex">
+       <int>4</int>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="game.ShipPart">
+      <void property="isUnshooted">
+       <boolean>true</boolean>
+      </void>
+      <void property="shipPartIndex">
+       <int>5</int>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="game.ShipPart">
+      <void property="isUnshooted">
+       <boolean>true</boolean>
+      </void>
+      <void property="shipPartIndex">
+       <int>6</int>
+      </void>
+     </object>
+    </void>
+   </object>
+  </void>
+  <void property="shipSize">
+   <int>3</int>
+  </void>
+  <void property="shipSizeDiff">
+   <int>2</int>
+  </void>
+  <void property="shipStartIndex">
+   <int>4</int>
+  </void>
+ </object>
+</java>
