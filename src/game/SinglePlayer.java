@@ -7,9 +7,11 @@ import javafx.stage.Stage;
 
 public class SinglePlayer implements Player {
 
-	private Board board;
+	private Board myBoard;
+	private Board enemyBoard;
 	private GameView gameView;
 	private boolean readyWithShipPlacement = false;
+	private boolean readyWithShoot = false;
 
 	public SinglePlayer(Stage stage) {
 
@@ -17,30 +19,9 @@ public class SinglePlayer implements Player {
 		gameView.build();
 	}
 
-	//	public void shoot(int index){
-//
-//		BoardCell cell = this.playerBoard.getCells().get(index);
-//
-//		if(cell.getIsEmptyCell())
-//		{
-//			cell.setIsShootedCell(true);
-//			System.out.println("Miss");
-//		}else{
-//			if(cell.getIsShootedCell()){
-//				System.out.println("Already shooted");
-//			}else{
-//				System.out.println("Hit");
-//				cell.setIsShootedCell(true);
-//				Ship shootedShip = cell.getShipPart().getShip();
-//				shootedShip.shootShip(index);
-//				this.setLife(this.getLife()-1);
-//			}
-//		}
-//	}
-
 	@Override
 	public void placeShips(Board board) {
-		this.board = board;
+		this.myBoard = board;
 		gameView.createUnPlacedShip(2);
 		gameView.createUnPlacedShip(2);
 		gameView.createUnPlacedShip(3);
@@ -51,7 +32,21 @@ public class SinglePlayer implements Player {
 
 	@Override
 	public void shoot(Board board) {
+		this.enemyBoard = board;
+		this.readyWithShoot = false;
+		this.gameView.shoot();
+
  		// TODO
+	}
+
+	@Override
+	public void updateMyBoard(Board board) {
+		this.gameView.redrawMyBoard(board);
+	}
+
+	@Override
+	public void updateEnemyBoard(Board board) {
+		this.gameView.redrawEnemyBoard(board);
 	}
 
 	@Override
@@ -59,10 +54,20 @@ public class SinglePlayer implements Player {
 		return this.readyWithShipPlacement;
 	}
 
+	@Override
+	public boolean isReadyWithShoot() {
+		return this.readyWithShoot;
+	}
+
 	public void afterShipSelection(ArrayList<Ship> ships) {
 		for (Ship ship: ships) {
-			board.addShip(ship.getShipStartIndex(), ship.getShipEndIndex());
+			myBoard.addShip(ship.getShipStartIndex(), ship.getShipEndIndex());
 		}
 		this.readyWithShipPlacement = true;
+	}
+
+	public void afterShoot(int cellIndex) {
+		this.enemyBoard.shootShip(cellIndex);
+		this.readyWithShoot = true;
 	}
 }

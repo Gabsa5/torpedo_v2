@@ -27,33 +27,74 @@ public class Controller {
 				break;
 		}
 
-		singlePlayer.placeShips(game.getMyBoard());
+		singlePlayer.placeShips(game.getSinglePlayerBoard());
 		otherPlayer.placeShips(game.getOtherBoard());
 
-		Thread thread = new Thread(() -> {
+		Thread gameThread = new Thread(() -> {
 
-			// Wait while players place ships
-			while(true) {
-				if (singlePlayer.isReadyWithPlaceShips() && otherPlayer.isReadyWithPlaceShips()) {
-					break;
-				}
-				try {
-					Thread.sleep(5000);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-			}
+			waitWhileShipPlacement();
 
 			System.out.println("Single Player Board:");
-			this.game.getMyBoard().prettyPrint();
+			this.game.getSinglePlayerBoard().prettyPrint();
 
 			System.out.println("Other Player Board:");
 			this.game.getOtherBoard().prettyPrint();
 
-			// TODO: Start shooting part
+			// Start shooting part
+			while(true) {
+				// Single player turn
+				this.singlePlayer.shoot(this.game.getOtherBoard());
+				waitWhileShoot(this.singlePlayer);
+				this.singlePlayer.updateEnemyBoard(this.game.getOtherBoard());
+				this.otherPlayer.updateMyBoard(this.game.getOtherBoard());
+				// TODO check if game is over
+
+				// Other player turn
+				this.otherPlayer.shoot(this.game.getSinglePlayerBoard());
+				waitWhileShoot(this.otherPlayer);
+				this.singlePlayer.updateMyBoard(this.game.getSinglePlayerBoard());
+				this.otherPlayer.updateEnemyBoard(this.game.getSinglePlayerBoard());
+				// TODO check if game is over
+
+				System.out.println("Single Player Board:");
+				this.game.getSinglePlayerBoard().prettyPrint();
+
+				System.out.println("Other Player Board:");
+				this.game.getOtherBoard().prettyPrint();
+			}
+
+
 		});
 
-		thread.start();
+		gameThread.start();
+	}
+
+	private void waitWhileShipPlacement() {
+		// TODO check player timeout
+		while(true) {
+			if (singlePlayer.isReadyWithPlaceShips() && otherPlayer.isReadyWithPlaceShips()) {
+				break;
+			}
+			try {
+				Thread.sleep(500);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	private void waitWhileShoot(Player player) {
+		// TODO check player timeout
+		while(true) {
+			if (player.isReadyWithShoot()) {
+				break;
+			}
+			try {
+				Thread.sleep(500);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 }

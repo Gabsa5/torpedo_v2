@@ -13,7 +13,7 @@ public class Game {
 		this.boards.add(new Board(boardSize));
 	}
 
-	public Board getMyBoard() {
+	public Board getSinglePlayerBoard() {
 		return boards.get(0);
 	}
 
