@@ -35,6 +35,7 @@ public class GameView {
 	private ArrayList<Rectangle> enemyCellRects = new ArrayList<>();
 	private ArrayList<Rectangle> ships = new ArrayList<>();
 	private Button startGameButton;
+	private Button endGameButton;
 
 	private String newLine = System.getProperty("line.separator");
 	
@@ -78,8 +79,21 @@ public class GameView {
 			singlePlayer.afterShipSelection(shipList);
 			root.getChildren().remove(startGameButton);
 		});
+
+		endGameButton = new Button();
+		endGameButton.setText("End the game!");
+		endGameButton.setTranslateX(400-endGameButton.getWidth()/2);
+		endGameButton.setTranslateY(500);
+		endGameButton.setOnAction(e -> {
+			MenuView menuView = new MenuView(stage);
+			try {
+				menuView.build();
+			} catch (Exception exception) {
+				exception.printStackTrace();
+			}
+		});
 		
-		root.getChildren().addAll(myLabel, otherLabel, startGameButton);
+		root.getChildren().addAll(myLabel, otherLabel, startGameButton, endGameButton);
 	
 		return root;
 	}
