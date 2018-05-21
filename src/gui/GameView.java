@@ -10,9 +10,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import game.ShipPart;
 import game.SinglePlayer;
 import javafx.application.Platform;
-import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -24,7 +24,6 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
-import javafx.scene.input.*;
 
 
 public class GameView {
@@ -39,16 +38,20 @@ public class GameView {
 	private ArrayList<Rectangle> myCellRects = new ArrayList<>();
 	private ArrayList<Rectangle> enemyCellRects = new ArrayList<>();
 	private ArrayList<Rectangle> ships = new ArrayList<>();
+	private ArrayList<Label> myShipLabels = new ArrayList<>();
+	private ArrayList<Label> enemyShipLabels = new ArrayList<>();
 	private Button startGameButton;
 	private Button endGameButton;
 	private Button saveGameButton;
 	private Label myTurnText;
+	private boolean isMultiplayer;
 
 	private String newLine = System.getProperty("line.separator");
 	
-	public GameView(Stage s, SinglePlayer singlePlayer) {
+	public GameView(Stage s, SinglePlayer singlePlayer, boolean isMultiplayer) {
 		this.stage = s;
 		this.singlePlayer = singlePlayer;
+		this.isMultiplayer = isMultiplayer;
 	}
 
 
@@ -144,7 +147,11 @@ public class GameView {
 		myTurnText.setFont(Font.font("Cambria", 22));
 		
 		
-		root.getChildren().addAll(myLabel, otherLabel, startGameButton, endGameButton, saveGameButton, myTurnText);
+		root.getChildren().addAll(myLabel, otherLabel, startGameButton, endGameButton, myTurnText);
+
+		if (!isMultiplayer) {
+			root.getChildren().add(saveGameButton);
+		}
 	
 		return root;
 	}
@@ -156,7 +163,15 @@ public class GameView {
 		endGameButton.setDisable(false);
 		endGameButton.setStyle("-fx-font-size: 4em; ");
 		endGameButton.setAlignment(Pos.CENTER);
-		
+
+		root.getChildren().removeAll(this.myShipLabels);
+		root.getChildren().removeAll(this.enemyShipLabels);
+		root.getChildren().remove(this.saveGameButton);
+		root.getChildren().remove(this.myTurnText);
+
+		this.enemyCellRects.forEach(rect -> rect.setDisable(true));
+
+
 		if(isWin) {
 			endGameButton.setText("You Win! Return to Menu!");
 			}
@@ -174,15 +189,17 @@ public class GameView {
 	}
 	
 	public void changeMyTurn() {
-		if(myTurnText.getText()=="My turn!") {
+		if(myTurnText.getText() == "My turn!") {
 			Platform.runLater(() -> {
 			myTurnText.setText("Enemy's turn!");
 			myTurnText.setTextFill(Color.INDIANRED);
+			this.enemyCellRects.forEach(rect -> rect.setDisable(true));
 			});
 		}else {
 			Platform.runLater(() -> {
 			myTurnText.setText("My turn!");
 			myTurnText.setTextFill(Color.DARKOLIVEGREEN);
+			this.enemyCellRects.forEach(rect -> rect.setDisable(false));
 			});
 		}
 	}
@@ -313,6 +330,62 @@ public class GameView {
 		stage.setScene(scene);
 		stage.setResizable(false);
 		stage.show();
+	}
+
+	public void updateMyShips(Board myBoard) {
+		Platform.runLater(() -> {
+			root.getChildren().removeAll(this.myShipLabels);
+			this.myShipLabels.clear();
+
+			int offset = 0;
+			for (Ship ship: myBoard.getShips()) {
+				int shipPartsNum = 0;
+				for (ShipPart shipPart: ship.getShipParts()) {
+					if (shipPart.getIsUnshooted()) {
+						shipPartsNum++;
+					}
+				}
+
+				Label label = new Label("Ship " + ship.getShipSize() + ": " + shipPartsNum);
+				label.setTranslateX(30);
+				label.setTranslateY(370 + offset);
+				label.setTextFill(Color.BLACK);
+				label.setFont(Font.font(12));
+
+				offset += 15;
+				this.myShipLabels.add(label);
+				root.getChildren().add(label);
+			}
+		});
+	}
+
+	public void updateEnemyShips(Board enemyBoard) {
+		Platform.runLater(() -> {
+			root.getChildren().removeAll(this.enemyShipLabels);
+			this.enemyShipLabels.clear();
+
+			int offset = 0;
+			for (Ship ship: enemyBoard.getShips()) {
+				int shipPartsNum = 0;
+				for (ShipPart shipPart: ship.getShipParts()) {
+					if (shipPart.getIsUnshooted()) {
+						shipPartsNum++;
+					}
+				}
+
+				if (shipPartsNum == 0) {
+					Label label = new Label("Ship " + ship.getShipSize() + " sink");
+					label.setTranslateX(450);
+					label.setTranslateY(370 + offset);
+					label.setTextFill(Color.BLACK);
+					label.setFont(Font.font(12));
+
+					offset += 15;
+					this.enemyShipLabels.add(label);
+					root.getChildren().add(label);
+				}
+			}
+		});
 	}
 	
 	public int getCellNumber(double x, double y) {

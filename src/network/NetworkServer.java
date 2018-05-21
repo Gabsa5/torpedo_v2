@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
-import java.net.Socket;
+import java.util.ArrayList;
 
 import game.Board;
 import game.MultiPlayerServer;
@@ -13,6 +13,8 @@ public class NetworkServer extends Network {
 
 	private MultiPlayerServer multiPlayerServer;
 	private ServerSocket serverSocket = null;
+
+	private ArrayList<Board> boardsToSendAtInit = new ArrayList<>();
 
 	public NetworkServer(MultiPlayerServer multiPlayerServer) {
 		this.multiPlayerServer = multiPlayerServer;
@@ -46,6 +48,8 @@ public class NetworkServer extends Network {
 					disconnect();
 					return;
 				}
+
+				this.boardsToSendAtInit.forEach(this::sendBoard);
 
 				try {
 					while(true) {
@@ -81,6 +85,15 @@ public class NetworkServer extends Network {
 				System.err.println("Could not close server socket");
 				e.printStackTrace();
 			}
+		}
+	}
+
+	@Override
+	public void sendBoard(Board board) {
+		if (this.out == null) {
+			boardsToSendAtInit.add(board);
+		} else {
+			super.sendBoard(board);
 		}
 	}
 }

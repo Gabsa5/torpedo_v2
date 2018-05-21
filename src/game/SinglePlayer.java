@@ -9,9 +9,9 @@ public class SinglePlayer extends Player {
 
 	private GameView gameView;
 
-	public SinglePlayer(Stage stage, boolean fromSave) {
+	public SinglePlayer(Stage stage, boolean fromSave, boolean isMultiplayer) {
 
-		gameView = new GameView(stage, this);
+		gameView = new GameView(stage, this, isMultiplayer);
 		gameView.build();
 
 		if (fromSave) {
@@ -35,17 +35,20 @@ public class SinglePlayer extends Player {
 		this.enemyBoard = board;
 		this.readyWithShoot = false;
 		this.gameView.shoot();
+		this.gameView.updateEnemyShips(board);
 	}
 
 	@Override
 	public void updateMyBoardAfterShoot(Board board) {
 		this.gameView.redrawMyBoard(board);
+		this.gameView.updateMyShips(board);
 		this.myBoard = board;
 	}
 
 	@Override
 	public void updateEnemyBoardAfterShoot(Board board) {
 		this.gameView.redrawEnemyBoard(board);
+		this.gameView.updateEnemyShips(board);
 		this.enemyBoard = board;
 	}
 
@@ -54,6 +57,7 @@ public class SinglePlayer extends Player {
 			myBoard.addShip(ship.getShipStartIndex(), ship.getShipEndIndex());
 		}
 		this.readyWithShipPlacement = true;
+		this.gameView.updateMyShips(myBoard);
 	}
 
 	public void afterShoot(int cellIndex) {

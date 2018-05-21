@@ -37,7 +37,7 @@ public class Controller {
 		this.gameType = gameType;
 
 		if(gameType.equals(GameType.CONTINUE)) {
-			this.singlePlayer = new SinglePlayer(stage, true);
+			this.singlePlayer = new SinglePlayer(stage, true, false);
 			
 			try {
 				FileInputStream fis = new FileInputStream(new File("./singleBoard.xml"));
@@ -90,17 +90,19 @@ public class Controller {
 			Thread gameThread = new Thread(this::playGame);
 			gameThread.start();
 		} else {
-			this.singlePlayer = new SinglePlayer(stage, false);
 
 			switch (gameType) {
 				case SINGLEPLAYER:
+					this.singlePlayer = new SinglePlayer(stage, false, false);
 					otherPlayer = new AIPlayer();
 					break;
 				case CLIENT:
+					this.singlePlayer = new SinglePlayer(stage, false, true);
 					String ipAddress = multiplayerSettingsView.getIpAddress();
 					otherPlayer = new MultiPlayerClient(ipAddress);
 					break;
 				case SERVER:
+					this.singlePlayer = new SinglePlayer(stage, false, true);
 					otherPlayer = new MultiPlayerServer();
 					break;
 			}
