@@ -3,8 +3,8 @@ package game;
 public interface Player {
 	void placeShips(Board board);
 	void shoot(Board board);
-	void setMyBoard(Board board);
-	void setEnemyBoard(Board board);
+	void updateMyBoardAfterShoot(Board board);
+	void updateEnemyBoardAfterShoot(Board board);
 	boolean isReadyWithPlaceShips();
 	boolean isReadyWithShoot();
 	int getEnemyLife();

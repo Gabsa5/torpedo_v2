@@ -38,7 +38,9 @@ public abstract class Network {
 			return;
 		}
 
-		System.out.println("Sending My Board");
+		System.out.println("Sending Board:");
+		board.prettyPrint();
+
 		try {
 			out.writeObject(board);
 			out.flush();

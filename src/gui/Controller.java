@@ -56,8 +56,8 @@ public class Controller {
 
 				this.otherPlayer = new AIPlayer();
 				
-				this.singlePlayer.setMyBoard(boards.get(0));
-				this.singlePlayer.setEnemyBoard(boards.get(1));
+				this.singlePlayer.updateMyBoardAfterShoot(boards.get(0));
+				this.singlePlayer.updateEnemyBoardAfterShoot(boards.get(1));
 				
 				
 				decoder.close();
@@ -77,13 +77,13 @@ public class Controller {
 			
 
 			
-			this.singlePlayer.setEnemyBoard(this.otherBoard);
-			this.otherPlayer.setMyBoard(this.otherBoard);
+			this.singlePlayer.updateEnemyBoardAfterShoot(this.otherBoard);
+			this.otherPlayer.updateMyBoardAfterShoot(this.otherBoard);
 			
 			this.singlePlayer.shipDrawContinue();
 			
-			this.singlePlayer.setMyBoard(this.singlePlayerBoard);
-			this.otherPlayer.setEnemyBoard(this.singlePlayerBoard);
+			this.singlePlayer.updateMyBoardAfterShoot(this.singlePlayerBoard);
+			this.otherPlayer.updateEnemyBoardAfterShoot(this.singlePlayerBoard);
 			
 			this.singlePlayer.setEnemyLife(this.singlePlayer.lifeLeft(this.singlePlayer.getEnemyBoard()));
 			this.otherPlayer.setEnemyLife(this.singlePlayer.lifeLeft(this.singlePlayer.getMyBoard()));
@@ -118,13 +118,13 @@ public class Controller {
 
 		waitWhileShipPlacement(this.singlePlayer);
 		this.singlePlayerBoard = singlePlayer.getMyBoard();
-		this.otherPlayer.setEnemyBoard(this.singlePlayerBoard);
+		this.otherPlayer.updateEnemyBoardAfterShoot(this.singlePlayerBoard);
 
 		// TODO: show 'Waiting for other' text
 		waitWhileShipPlacement(this.otherPlayer);
 		// TODO: hide 'Waiting for other' text
 		this.otherBoard = otherPlayer.getMyBoard();
-		this.singlePlayer.setEnemyBoard(this.otherBoard);
+		this.singlePlayer.updateEnemyBoardAfterShoot(this.otherBoard);
 
 
 		System.out.println("Single Player Board:");
@@ -145,8 +145,8 @@ public class Controller {
 				this.otherPlayer.shoot(this.singlePlayerBoard);
 				waitWhileShoot(this.otherPlayer);
 				this.singlePlayerBoard = this.otherPlayer.getEnemyBoard();
-				this.singlePlayer.setMyBoard(this.singlePlayerBoard);
-				//this.otherPlayer.setEnemyBoard(this.singlePlayerBoard);
+				this.singlePlayer.updateMyBoardAfterShoot(this.singlePlayerBoard);
+				this.otherPlayer.updateEnemyBoardAfterShoot(this.singlePlayerBoard);
 				this.singlePlayer.changeText();
 				if (this.singlePlayerBoard.isShotDone()) {
 					this.otherPlayer.updateEnemyLife();
@@ -162,8 +162,8 @@ public class Controller {
 				this.singlePlayer.shoot(this.otherBoard);
 				waitWhileShoot(this.singlePlayer);
 				this.otherBoard = this.singlePlayer.getEnemyBoard();
-				this.singlePlayer.setEnemyBoard(this.otherBoard);
-				this.otherPlayer.setMyBoard(this.otherBoard);
+				this.singlePlayer.updateEnemyBoardAfterShoot(this.otherBoard);
+				this.otherPlayer.updateMyBoardAfterShoot(this.otherBoard);
 				this.singlePlayer.changeText();
 				if (this.otherBoard.isShotDone()) {
 					this.singlePlayer.updateEnemyLife();
@@ -179,8 +179,8 @@ public class Controller {
 				this.singlePlayer.shoot(this.otherBoard);
 				waitWhileShoot(this.singlePlayer);
 				this.otherBoard = this.singlePlayer.getEnemyBoard();
-				this.singlePlayer.setEnemyBoard(this.otherBoard);
-				this.otherPlayer.setMyBoard(this.otherBoard);
+				this.singlePlayer.updateEnemyBoardAfterShoot(this.otherBoard);
+				this.otherPlayer.updateMyBoardAfterShoot(this.otherBoard);
 				this.singlePlayer.changeText();
 				if (this.otherBoard.isShotDone()) {
 					this.singlePlayer.updateEnemyLife();
@@ -194,8 +194,8 @@ public class Controller {
 				this.otherPlayer.shoot(this.singlePlayerBoard);
 				waitWhileShoot(this.otherPlayer);
 				this.singlePlayerBoard = this.otherPlayer.getEnemyBoard();
-				this.singlePlayer.setMyBoard(this.singlePlayerBoard);
-				this.otherPlayer.setEnemyBoard(this.singlePlayerBoard);
+				this.singlePlayer.updateMyBoardAfterShoot(this.singlePlayerBoard);
+				this.otherPlayer.updateEnemyBoardAfterShoot(this.singlePlayerBoard);
 				this.singlePlayer.changeText();
 				if (this.singlePlayerBoard.isShotDone()) {
 					this.otherPlayer.updateEnemyLife();

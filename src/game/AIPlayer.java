@@ -59,12 +59,12 @@ public class AIPlayer implements Player {
 	}
 
 	@Override
-	public void setMyBoard(Board board) {
+	public void updateMyBoardAfterShoot(Board board) {
 		this.myBoard = board;
 	}
 
 	@Override
-	public void setEnemyBoard(Board board) {
+	public void updateEnemyBoardAfterShoot(Board board) {
 		this.enemyBoard = board;
 	}
 

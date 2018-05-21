@@ -34,6 +34,8 @@ public class NetworkClient extends Network {
 				try {
 					while(true) {
 						Board board = (Board) in.readObject();
+						System.out.println("Board received:");
+						board.prettyPrint();
 						this.multiPlayerClient.onBoardReceive(board);
 					}
 				} catch (Exception e) {

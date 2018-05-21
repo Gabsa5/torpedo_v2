@@ -34,12 +34,12 @@ public class MultiPlayerServer implements Player {
 	}
 
 	@Override
-	public void setMyBoard(Board board) {
-//		this.networkServer.sendBoard(board);
+	public void updateMyBoardAfterShoot(Board board) {
+		this.networkServer.sendBoard(board);
 	}
 
 	@Override
-	public void setEnemyBoard(Board board) {
+	public void updateEnemyBoardAfterShoot(Board board) {
 		this.networkServer.sendBoard(board);
 	}
 

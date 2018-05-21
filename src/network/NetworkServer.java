@@ -50,6 +50,8 @@ public class NetworkServer extends Network {
 				try {
 					while(true) {
 						Board board = (Board) in.readObject();
+						System.out.println("Board received:");
+						board.prettyPrint();
 						this.multiPlayerServer.onBoardReceive(board);
 
 					}

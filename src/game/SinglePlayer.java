@@ -40,13 +40,13 @@ public class SinglePlayer implements Player {
 	}
 
 	@Override
-	public void setMyBoard(Board board) {
+	public void updateMyBoardAfterShoot(Board board) {
 		this.gameView.redrawMyBoard(board);
 		this.myBoard = board;
 	}
 
 	@Override
-	public void setEnemyBoard(Board board) {
+	public void updateEnemyBoardAfterShoot(Board board) {
 		this.gameView.redrawEnemyBoard(board);
 		this.enemyBoard = board;
 	}

@@ -30,12 +30,12 @@ public class MultiPlayerClient implements Player {
 	}
 
 	@Override
-	public void setMyBoard(Board board) {
+	public void updateMyBoardAfterShoot(Board board) {
 		this.networkClient.sendBoard(board);
 	}
 
 	@Override
-	public void setEnemyBoard(Board board) {
+	public void updateEnemyBoardAfterShoot(Board board) {
 		this.enemyBoard = board;
 		networkClient.sendBoard(board);
 	}
@@ -89,8 +89,10 @@ public class MultiPlayerClient implements Player {
 			case SHIP_PLACEMENT:
 				this.readyWithShipPlacement = true;
 				this.myBoard = board;
-				this.stage = MultiPlayerStage.SHOOT;
+				this.stage = MultiPlayerStage.AFTER_NETWORK_SHOT;
 				break;
+			case AFTER_NETWORK_SHOT:
+				this.enemyBoard = board;
 			case SHOOT:
 				this.enemyBoard = board;
 				this.readyWithShoot = true;
