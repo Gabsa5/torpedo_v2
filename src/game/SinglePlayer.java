@@ -12,11 +12,13 @@ public class SinglePlayer implements Player {
 	private GameView gameView;
 	private boolean readyWithShipPlacement = false;
 	private boolean readyWithShoot = false;
+	private int enemyLife;
 
 	public SinglePlayer(Stage stage) {
 
 		gameView = new GameView(stage, this);
 		gameView.build();
+		this.enemyLife = 19;
 	}
 
 	@Override
@@ -67,7 +69,74 @@ public class SinglePlayer implements Player {
 	}
 
 	public void afterShoot(int cellIndex) {
-		this.enemyBoard.shootShip(cellIndex);
-		this.readyWithShoot = true;
+		if(this.enemyBoard.shootShip(cellIndex) && this.enemyLife != 0)
+			this.readyWithShoot = true;
+		else {
+			this.readyWithShoot = false;
+		}
+	}
+
+	public void setEnemyLife() {
+		this.enemyLife = enemyLife - 1;
+		
+	}
+	
+	public void setEnemyLife(int life) {
+		this.enemyLife = life;
+	}
+
+	@Override
+	public int getEnemyLife() {
+		return this.enemyLife;
+		
+	}
+
+	@Override
+	public void createEndButton(boolean isWin) {
+		this.gameView.createEnd(isWin);
+		
+	}
+
+	public void setMyBoard(Board myBoard) {
+		this.myBoard = myBoard;
+	}
+
+	public void setEnemyBoard(Board board) {
+		this.enemyBoard = board;
+	}
+
+	public Board getMyBoard() {
+		return myBoard;
+	}
+
+	public Board getEnemyBoard() {
+		return enemyBoard;
+	}
+
+	public void shipDrawContinue() {
+		this.gameView.shipDrawContinue();
+	}
+	
+	public void changeTextVisibility() {
+		this.gameView.changeMyTurnTextVisibility();
+	}
+	
+	public void changeText() {
+		this.gameView.changeMyTurn();
+	}
+	
+	public int lifeLeft(Board board)
+	{
+		int life=0;
+		for(int index=0; index<100; index++)
+		{
+			if(!board.getCells().get(index).getIsEmptyCell() && 
+					!board.getCells().get(index).getIsShootedCell())
+			{
+				life++;
+			}
+			
+		}
+		return life;
 	}
 }

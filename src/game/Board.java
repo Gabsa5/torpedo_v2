@@ -9,11 +9,17 @@ public class Board {
 	private int boardSizeSQ;
 	private ArrayList<BoardCell> cells;
 	private ArrayList<Ship> ships = new ArrayList<>();
+	private boolean shotSuccessful;
+	
+	public Board() {
+		
+	}
 
 	//Constructor
 	public Board(int boardSize) {
 		this.boardSize = boardSize;
 		this.boardSizeSQ = this.boardSize * this.boardSize;
+		this.shotSuccessful = false;
 
 		this.initializeCells();
 
@@ -38,16 +44,24 @@ public class Board {
 		}
 	}
 
-	public void shootShip(int cellIndex) {
+	public boolean shootShip(int cellIndex) {
 		System.out.println("Lövés: " + cellIndex);
 		BoardCell targetCell = this.cells.get(cellIndex);
+		
+		if(targetCell.getIsShootedCell()) {
+			return false;
+		}
 		targetCell.setIsShootedCell(true);
 		if (targetCell.getIsEmptyCell()) {
 			System.out.println("Nem talált!");
+			shotSuccessful = false;
+			
 		} else {
 			System.out.println("Talált!");
+			shotSuccessful = true;
 			targetCell.getShipPart().setIsUnshooted(false);
 		}
+		return true;
 	}
 
 	public void prettyPrint() {
@@ -82,4 +96,41 @@ public class Board {
 	public ArrayList<BoardCell> getCells() {
 		return cells;
 	}
+
+	public boolean isShotDone() {
+		return shotSuccessful;
+	}
+
+	public void setShotDone(boolean shotSuccessful) {
+		this.shotSuccessful = shotSuccessful;
+	}
+
+	public ArrayList<Ship> getShips() {
+		return ships;
+	}
+
+	public void setShips(ArrayList<Ship> ships) {
+		this.ships = ships;
+	}
+
+	public boolean isShotSuccessful() {
+		return shotSuccessful;
+	}
+
+	public void setShotSuccessful(boolean shotSuccessful) {
+		this.shotSuccessful = shotSuccessful;
+	}
+
+	public void setBoardSize(int boardSize) {
+		this.boardSize = boardSize;
+	}
+
+	public void setBoardSizeSQ(int boardSizeSQ) {
+		this.boardSizeSQ = boardSizeSQ;
+	}
+
+	public void setCells(ArrayList<BoardCell> cells) {
+		this.cells = cells;
+	}
+
 }

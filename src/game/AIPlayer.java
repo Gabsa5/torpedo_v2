@@ -8,6 +8,15 @@ import AI.NeuralNetwork;
 public class AIPlayer implements Player {
 
 	private NeuralNetwork neuralNetwork;
+	private int enemyLife = 19;
+
+	public void setEnemyLife(int life) {
+		this.enemyLife = life;
+	}
+
+	public void setEnemyLife() {
+		this.enemyLife = enemyLife - 1;
+	}
 
 	public AIPlayer() {
 		try {
@@ -30,7 +39,7 @@ public class AIPlayer implements Player {
 
 	@Override
 	public void shoot(Board board) {
-		int cellIndex = neuralNetwork.nextStep(this.boardToAIBoard(board));
+		int cellIndex = neuralNetwork.nextStep(board);
 		board.shootShip(cellIndex);
 	}
 
@@ -53,21 +62,17 @@ public class AIPlayer implements Player {
 	@Override
 	public boolean isReadyWithShoot() {
 		return true;
+	}	
+	
+	@Override
+	public int getEnemyLife() {
+		return this.enemyLife;
+		
 	}
-
-	private Float[] boardToAIBoard(Board board) {
-		Float[] aiBoard = new Float[board.getBoardSizeSQ()];
-
-		for(BoardCell cell: board.getCells()) {
-			if (cell.getIsShootedCell() && !cell.getIsEmptyCell()) {
-				aiBoard[cell.getCellIndex()] = 1f;
-			} else if (!cell.getIsShootedCell()) {
-				aiBoard[cell.getCellIndex()] = 0f;
-			} else {
-				aiBoard[cell.getCellIndex()] = -1f;
-			}
-		}
-
-		return aiBoard;
+	@Override
+	public void createEndButton(boolean isWin) {
+		
+		
 	}
+	
 }

@@ -4,11 +4,16 @@ import game.Board;
 import game.BoardCell;
 import game.Ship;
 
+import java.beans.XMLEncoder;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import game.SinglePlayer;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -36,6 +41,8 @@ public class GameView {
 	private ArrayList<Rectangle> ships = new ArrayList<>();
 	private Button startGameButton;
 	private Button endGameButton;
+	private Button saveGameButton;
+	private Label myTurnText;
 
 	private String newLine = System.getProperty("line.separator");
 	
@@ -78,12 +85,20 @@ public class GameView {
 			}
 			singlePlayer.afterShipSelection(shipList);
 			root.getChildren().remove(startGameButton);
+			saveGameButton.setVisible(true);
+			saveGameButton.setDisable(false);
 		});
+		
+		
 
 		endGameButton = new Button();
 		endGameButton.setText("End the game!");
-		endGameButton.setTranslateX(400-endGameButton.getWidth()/2);
-		endGameButton.setTranslateY(500);
+		endGameButton.setDisable(true);
+		endGameButton.setVisible(false);
+		endGameButton.setPrefSize(700, 180);
+		endGameButton.setTranslateX(50);
+		endGameButton.setTranslateY(400);
+
 		endGameButton.setOnAction(e -> {
 			MenuView menuView = new MenuView(stage);
 			try {
@@ -93,9 +108,83 @@ public class GameView {
 			}
 		});
 		
-		root.getChildren().addAll(myLabel, otherLabel, startGameButton, endGameButton);
+		saveGameButton = new Button();
+		saveGameButton.setText("Save");
+		saveGameButton.setTranslateX(5);
+		saveGameButton.setTranslateX(760);
+		saveGameButton.setVisible(false);
+		saveGameButton.setDisable(true);
+		
+		saveGameButton.setOnAction(e -> {
+			try {
+				FileOutputStream fos1 = new FileOutputStream(new File("./singleBoard.xml"));
+				XMLEncoder encoder1 = new XMLEncoder(fos1);
+				encoder1.writeObject(singlePlayer.getMyBoard());
+				FileOutputStream fos2 = new FileOutputStream(new File("./enemyBoard.xml"));
+				XMLEncoder encoder2 = new XMLEncoder(fos2);
+				encoder2.writeObject(singlePlayer.getEnemyBoard());
+
+				
+				encoder1.close();
+				encoder2.close();
+
+				fos1.close();
+				fos2.close();
+
+			} catch (IOException ex) {
+				ex.printStackTrace();
+			}
+		});
+		
+		myTurnText = new Label("My turn!");
+		myTurnText.setTranslateX(380);
+		myTurnText.setTranslateY(570);
+		myTurnText.setVisible(false);
+		myTurnText.setTextFill(Color.DARKOLIVEGREEN);
+		myTurnText.setFont(Font.font("Cambria", 22));
+		
+		
+		root.getChildren().addAll(myLabel, otherLabel, startGameButton, endGameButton, saveGameButton, myTurnText);
 	
 		return root;
+	}
+		
+	public void createEnd(boolean isWin) {
+		
+		Platform.runLater(() -> {
+		endGameButton.setVisible(true);
+		endGameButton.setDisable(false);
+		endGameButton.setStyle("-fx-font-size: 4em; ");
+		endGameButton.setAlignment(Pos.CENTER);
+		
+		if(isWin) {
+			endGameButton.setText("You Win! Return to Menu!");
+			}
+		else {
+			endGameButton.setText("You Loose! Return to Menu!");
+		}
+		});
+	}
+	
+	public void changeMyTurnTextVisibility() {
+		if(myTurnText.isVisible())
+			myTurnText.setVisible(false);
+		else
+			myTurnText.setVisible(true);
+	}
+	
+	public void changeMyTurn() {
+		if(myTurnText.getText()=="My turn!") {
+			Platform.runLater(() -> {
+			myTurnText.setText("Enemy's turn!");
+			myTurnText.setTextFill(Color.INDIANRED);
+			});
+		}else {
+			Platform.runLater(() -> {
+			myTurnText.setText("My turn!");
+			myTurnText.setTextFill(Color.DARKOLIVEGREEN);
+			});
+		}
 	}
 
 	public void createUnPlacedShip(int l) {
@@ -149,6 +238,7 @@ public class GameView {
 			
 			if(isShipsAcceptable()) {
 				startGameButton.setDisable(false);
+				
 			}else {
 				startGameButton.setDisable(true);
 			}
@@ -180,6 +270,7 @@ public class GameView {
 			cell.setDisable(false);
 		}
 	}
+	
 
 	public void redrawMyBoard(Board board) {
 		for(BoardCell boardCell: board.getCells()) {
@@ -471,7 +562,46 @@ public class GameView {
 			alpha++;
 			x = x + 30;
 			root.getChildren().add(z);
+			}
+	}
+	
+	public void shipDrawContinue() {
+		startGameButton.setVisible(false);
+		startGameButton.setDisable(true);
+		saveGameButton.setVisible(true);
+		saveGameButton.setDisable(false);
+		
+		for(BoardCell cell : singlePlayer.getMyBoard().getCells()) {
+			if(!cell.getIsEmptyCell()) {
+				int cellIndex = cell.getCellIndex();
+				Rectangle rect = new Rectangle();
+				rect.setWidth(30);
+				rect.setHeight(30);
+				rect.setX(getMyCellNumberX(cellIndex));
+				rect.setY(getMyCellNumberY(cellIndex));
+				
+				rect.setFill(Color.LIGHTGREEN);
+				rect.setStroke(Color.DARKGREEN);
+				root.getChildren().add(rect);
+				
+				
+				
+				/*
+				if (boardCell.getIsShootedCell() && boardCell.getIsEmptyCell()) {
+					rect.setFill(Color.YELLOW);
+				} else if (boardCell.getIsShootedCell() && !boardCell.getIsEmptyCell()) {
+					Rectangle shootedRect = new Rectangle();
+					shootedRect.setX(rect.getX());
+					shootedRect.setY(rect.getY());
+					shootedRect.setWidth(rect.getWidth());
+					shootedRect.setHeight(rect.getHeight());
+					shootedRect.setStroke(Color.BLACK);
+					shootedRect.setFill(Color.RED);*/
+			}
+			
 		}
+	
+		
 	}
 	
 

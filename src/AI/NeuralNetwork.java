@@ -22,6 +22,9 @@ public class NeuralNetwork {
 	private Float[] FIRSTLAYERBIAS;
 	private Float[] SECONDLAYERBIAS;
 	private Float[] OUTPUTBIAS;
+	private int LASTHITTED;
+	private boolean ISLASTHITTED;
+	
 
 	/**
 	 * Construct the object.
@@ -31,6 +34,7 @@ public class NeuralNetwork {
 	public NeuralNetwork() throws IOException
 	{
 		setNetwork();
+		this.ISLASTHITTED = false;
 	}
 
 	/**
@@ -302,6 +306,26 @@ public class NeuralNetwork {
 		Float[] firstLayerOutput = layerOutput(input, this.FIRSTLAYERWEIGHTS, this.FIRSTLAYERBIAS, true, 128);
 		Float[] secondLayerOutput = layerOutput(firstLayerOutput, this.SECONDLAYERWEIGHTS, this.SECONDLAYERBIAS, true, 128);
 		Float[] output = layerOutput(secondLayerOutput, this.OUTPUTWEIGHTS, this.OUTPUTBIAS, false, 100);
+		if(this.ISLASTHITTED)
+		{
+			if(this.LASTHITTED>0)
+			{
+				output[this.LASTHITTED-1] = output[this.LASTHITTED-1] * (float)1.5;
+			}
+			if(this.LASTHITTED<99)
+			{
+				output[this.LASTHITTED+1] = output[this.LASTHITTED-1] * (float)1.5;
+			}
+			if(this.LASTHITTED>9)
+			{
+				output[this.LASTHITTED-10] = output[this.LASTHITTED-10] * (float)1.5;
+			}
+			if(this.LASTHITTED<89)
+			{
+				output[this.LASTHITTED+10] = output[this.LASTHITTED+10] * (float)1.5;
+			}
+		}
+		
 		for (int i = 0; i<input.length; i++)
 		{
 			if(input[i]==-1 || input[i]==1)
@@ -309,6 +333,8 @@ public class NeuralNetwork {
 				output[i] = (float) -99;
 			}
 		}
+	
+		
 		return output;
 	}
 
@@ -316,30 +342,80 @@ public class NeuralNetwork {
 	 * Computes the next step for the given board.
 	 *
 	 * @param board Input board.
-	 * @return Nest step's index.
+	 * @return Next step's index.
 	 */
-	public int nextStep(Float[] board)
+	public int nextStep(Board board)
 	{
-		return argMax(output(board));
+		if(lifeLeft(board)<4)
+		{
+			return lastSteps(board);
+		}
+		int shootIndex = argMax(output(boardToAIBoard(board)));
+		if(!board.getCells().get(shootIndex).getIsEmptyCell() && !board.getCells().get(shootIndex).getIsShootedCell())
+		{
+			this.ISLASTHITTED = true;
+			this.LASTHITTED = shootIndex;
+		}		
+		
+		return shootIndex;
 	}
 
-	public Float[] boardToArray(Board board) {
-		List<Float> temps = new ArrayList<Float>();
-		for (BoardCell cell : board.getCells())
-		{
-			if(cell.getIsEmptyCell())
-			{
-				temps.add((float) 0);
-			}
-			else if(cell.getIsShootedCell())
-			{
+	private Float[] boardToAIBoard(Board board) {
+		Float[] aiBoard = new Float[board.getBoardSizeSQ()];
 
+		for(BoardCell cell: board.getCells()) {
+			if (cell.getIsShootedCell() && !cell.getIsEmptyCell()) {
+				aiBoard[cell.getCellIndex()] = 1f;
+			} else if (!cell.getIsShootedCell()) {
+				aiBoard[cell.getCellIndex()] = 0f;
+			} else {
+				aiBoard[cell.getCellIndex()] = -1f;
 			}
 		}
 
-		Float[] boardArray = temps.toArray(new Float[0]);
-		System.out.println(boardArray);
-		return(boardArray);
+		return aiBoard;
+	}
+	
+	/**
+	 * Shoot the last shoots.
+	 * 
+	 * @param board Input board
+	 * @return Shot cell's index
+	 */
+	private int lastSteps(Board board)
+	{
+		int index=0;
+		while(index<100)
+		{
+			if(!board.getCells().get(index).getIsEmptyCell() && 
+					!board.getCells().get(index).getIsShootedCell())
+			{
+				return index;
+			}
+			index++;
+		}
+		return index;
+	}
+	
+	/**
+	 * Counts the remaining lives.
+	 * 
+	 * @param board Input board
+	 * @return Remaining lives
+	 */
+	private int lifeLeft(Board board)
+	{
+		int life=0;
+		for(int index=0; index<100; index++)
+		{
+			if(!board.getCells().get(index).getIsEmptyCell() && 
+					!board.getCells().get(index).getIsShootedCell())
+			{
+				life++;
+			}
+			
+		}
+		return life;
 	}
 
 }

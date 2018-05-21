@@ -4,6 +4,7 @@ public class MultiPlayer implements Player{
 
 	private boolean readyWithShipPlacement = false;
 	private boolean readyWithShoot = false;
+	private int enemyLife = 19;
 
 	@Override
 	public void placeShips(Board board) {
@@ -34,5 +35,28 @@ public class MultiPlayer implements Player{
 	@Override
 	public boolean isReadyWithShoot() {
 		return this.readyWithShoot;
+	}
+
+	@Override
+	public void setEnemyLife() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	@Override
+	public int getEnemyLife() {
+		return this.enemyLife;
+		
+	}
+	
+	@Override
+	public void createEndButton(boolean isWin) {
+		
+	}
+
+	@Override
+	public void setEnemyLife(int life) {
+		// TODO Auto-generated method stub
+		
 	}
 }

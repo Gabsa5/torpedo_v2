@@ -7,6 +7,10 @@ public class ShipPart {
 	private int shipPartIndex;
 	private Ship ship;
 	
+	public ShipPart() {
+		
+	}
+	
 	public ShipPart(Ship ship, int shipPartIndex){
 		this.ship = ship;
 		this.shipPartIndex=shipPartIndex;
@@ -35,5 +39,13 @@ public class ShipPart {
 
 	public Ship getShip() {
 		return ship;
+	}
+
+	public void setUnshooted(boolean isUnshooted) {
+		this.isUnshooted = isUnshooted;
+	}
+
+	public void setShip(Ship ship) {
+		this.ship = ship;
 	}
 }

@@ -17,6 +17,10 @@ public class Ship {
 	private int shipSize;
 	private ArrayList<ShipPart> shipParts;
 	
+	public Ship(){
+		
+	}
+	
 	public Ship(int shipStartIndex, int shipEndIndex){
 		this.shipStartIndex =shipStartIndex;
 		this.shipEndIndex = shipEndIndex;

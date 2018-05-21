@@ -7,4 +7,9 @@ public interface Player {
 	void updateEnemyBoard(Board board);
 	boolean isReadyWithPlaceShips();
 	boolean isReadyWithShoot();
+	void setEnemyLife();
+	int getEnemyLife();
+	void createEndButton(boolean isWin);
+	void setEnemyLife(int life);
+
 }

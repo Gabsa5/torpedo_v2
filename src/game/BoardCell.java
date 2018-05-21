@@ -6,6 +6,10 @@ public class BoardCell {
 	private int cellIndex;
 	private boolean isShootedCell;
 	private ShipPart shipPart;
+	
+	public BoardCell() {
+		
+	}
 
 	
 	public BoardCell(int cellIndex){
@@ -47,5 +51,10 @@ public class BoardCell {
 
 	public void setShipPart(ShipPart shipPart) {
 		this.shipPart = shipPart;
+	}
+
+
+	public void setShootedCell(boolean isShootedCell) {
+		this.isShootedCell = isShootedCell;
 	}
 }

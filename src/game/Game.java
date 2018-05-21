@@ -20,4 +20,12 @@ public class Game {
 	public Board getOtherBoard() {
 		return boards.get(1);
 	}
+
+	public ArrayList<Board> getBoards() {
+		return boards;
+	}
+
+	public void setBoards(ArrayList<Board> boards) {
+		this.boards = boards;
+	}
 }
