@@ -66,22 +66,29 @@ public class Board implements Serializable {
 	}
 
 	public void prettyPrint() {
+		System.out.println(this.toString());
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
 		for (int j = 0; j < boardSize; j++) {
 			for (int i = 1; i <= boardSize; i++) {
 				BoardCell cell = cells.get(j * boardSize + i - 1);
 				if (cell.getIsEmptyCell() && !cell.getIsShootedCell()) {
-					System.out.print("0");
+					builder.append("0");
 				} else if (!cell.getIsEmptyCell() && !cell.getIsShootedCell()) {
-					System.out.print(cell.getShipPart().getShip().getShipSize());
+					builder.append(cell.getShipPart().getShip().getShipSize());
 				} else if (!cell.getIsEmptyCell() && cell.getIsShootedCell()) {
-					System.out.print("X");
+					builder.append("X");
 				} else {
-					System.out.print("U");
+					builder.append("U");
 				}
-				System.out.print(" ");
+				builder.append(" ");
 			}
-			System.out.println();
+			builder.append("\n");
 		}
+		return builder.toString();
 	}
 
 	//Getter for boardSize

@@ -1,16 +1,8 @@
 package game;
 
-import javafx.stage.Stage;
 import network.NetworkServer;
 
-public class MultiPlayerServer implements Player {
-
-	private Board myBoard;
-	private Board enemyBoard;
-
-	private boolean readyWithShipPlacement = false;
-	private boolean readyWithShoot = false;
-	private int enemyLife = 19;
+public class MultiPlayerServer extends Player {
 	private NetworkServer networkServer;
 	private MultiPlayerStage stage;
 
@@ -35,56 +27,14 @@ public class MultiPlayerServer implements Player {
 
 	@Override
 	public void updateMyBoardAfterShoot(Board board) {
+		this.myBoard = board;
 		this.networkServer.sendBoard(board);
 	}
 
 	@Override
 	public void updateEnemyBoardAfterShoot(Board board) {
+		this.enemyBoard = board;
 		this.networkServer.sendBoard(board);
-	}
-
-
-	@Override
-	public boolean isReadyWithPlaceShips() {
-		return this.readyWithShipPlacement;
-	}
-
-	@Override
-	public boolean isReadyWithShoot() {
-		return this.readyWithShoot;
-	}
-
-	@Override
-	public void updateEnemyLife() {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	@Override
-	public int getEnemyLife() {
-		return this.enemyLife;
-		
-	}
-	
-	@Override
-	public void createEndButton(boolean isWin) {
-		
-	}
-
-	@Override
-	public void setEnemyLife(int life) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public Board getMyBoard() {
-		return this.myBoard;
-	}
-
-	@Override
-	public Board getEnemyBoard() {
-		return this.enemyBoard;
 	}
 
 	public void onBoardReceive(Board board) {
@@ -92,9 +42,9 @@ public class MultiPlayerServer implements Player {
 			case SHIP_PLACEMENT:
 				this.readyWithShipPlacement = true;
 				this.myBoard = board;
-				this.stage = MultiPlayerStage.SHOOT;
+				this.stage = MultiPlayerStage.AFTER_NETWORK_SHOT;
 				break;
-			case SHOOT:
+			case AFTER_NETWORK_SHOT:
 				this.enemyBoard = board;
 				this.readyWithShoot = true;
 				break;

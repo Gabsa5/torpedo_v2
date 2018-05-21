@@ -5,13 +5,9 @@ import java.io.IOException;
 import AI.BattleshipAI;
 import AI.NeuralNetwork;
 
-public class AIPlayer implements Player {
+public class AIPlayer extends Player {
 
 	private NeuralNetwork neuralNetwork;
-	private int enemyLife = 19;
-
-	private Board myBoard;
-	private Board enemyBoard;
 
 	public AIPlayer() {
 		try {
@@ -19,24 +15,6 @@ public class AIPlayer implements Player {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}
-
-	public void setEnemyLife(int life) {
-		this.enemyLife = life;
-	}
-
-	@Override
-	public Board getMyBoard() {
-		return this.myBoard;
-	}
-
-	@Override
-	public Board getEnemyBoard() {
-		return this.enemyBoard;
-	}
-
-	public void updateEnemyLife() {
-		this.enemyLife = enemyLife - 1;
 	}
 
 	@Override
@@ -49,6 +27,7 @@ public class AIPlayer implements Player {
 		battleshipAI.addRandomShip(4);
 		battleshipAI.addRandomShip(5);
 		this.myBoard = board;
+		this.readyWithShipPlacement = true;
 	}
 
 	@Override
@@ -56,6 +35,7 @@ public class AIPlayer implements Player {
 		int cellIndex = neuralNetwork.nextStep(board);
 		board.shootShip(cellIndex);
 		this.enemyBoard = board;
+		this.readyWithShoot = true;
 	}
 
 	@Override
@@ -68,25 +48,8 @@ public class AIPlayer implements Player {
 		this.enemyBoard = board;
 	}
 
-
 	@Override
 	public boolean isReadyWithPlaceShips() {
 		return true;
 	}
-
-	@Override
-	public boolean isReadyWithShoot() {
-		return true;
-	}	
-	
-	@Override
-	public int getEnemyLife() {
-		return this.enemyLife;
-	}
-
-	@Override
-	public void createEndButton(boolean isWin) {
-		
-	}
-	
 }

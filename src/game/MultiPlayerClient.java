@@ -2,14 +2,7 @@ package game;
 
 import network.NetworkClient;
 
-public class MultiPlayerClient implements Player {
-
-	private Board myBoard;
-	private Board enemyBoard;
-
-	private boolean readyWithShipPlacement = false;
-	private boolean readyWithShoot = false;
-	private int enemyLife = 19;
+public class MultiPlayerClient extends Player {
 	private NetworkClient networkClient;
 	private MultiPlayerStage stage;
 
@@ -36,52 +29,7 @@ public class MultiPlayerClient implements Player {
 
 	@Override
 	public void updateEnemyBoardAfterShoot(Board board) {
-		this.enemyBoard = board;
-		networkClient.sendBoard(board);
-	}
-
-
-	@Override
-	public boolean isReadyWithPlaceShips() {
-		return this.readyWithShipPlacement;
-	}
-
-	@Override
-	public boolean isReadyWithShoot() {
-		return this.readyWithShoot;
-	}
-
-	@Override
-	public void updateEnemyLife() {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	@Override
-	public int getEnemyLife() {
-		return this.enemyLife;
-		
-	}
-	
-	@Override
-	public void createEndButton(boolean isWin) {
-		
-	}
-
-	@Override
-	public void setEnemyLife(int life) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public Board getMyBoard() {
-		return this.myBoard;
-	}
-
-	@Override
-	public Board getEnemyBoard() {
-		return this.enemyBoard;
+		this.networkClient.sendBoard(board);
 	}
 
 	public void onBoardReceive(Board board) {
@@ -93,9 +41,12 @@ public class MultiPlayerClient implements Player {
 				break;
 			case AFTER_NETWORK_SHOT:
 				this.enemyBoard = board;
+				this.stage = MultiPlayerStage.SHOOT;
+				break;
 			case SHOOT:
-				this.enemyBoard = board;
 				this.readyWithShoot = true;
+				this.myBoard = board;
+				this.stage = MultiPlayerStage.AFTER_NETWORK_SHOT;
 				break;
 		}
 	}

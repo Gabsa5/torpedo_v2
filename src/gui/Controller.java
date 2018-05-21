@@ -34,10 +34,10 @@ public class Controller {
 
 		this.singlePlayerBoard = new Board(10);
 		this.otherBoard = new Board(10);
-		this.singlePlayer = new SinglePlayer(stage);
 		this.gameType = gameType;
 
 		if(gameType.equals(GameType.CONTINUE)) {
+			this.singlePlayer = new SinglePlayer(stage, true);
 			
 			try {
 				FileInputStream fis = new FileInputStream(new File("./singleBoard.xml"));
@@ -85,14 +85,13 @@ public class Controller {
 			this.singlePlayer.updateMyBoardAfterShoot(this.singlePlayerBoard);
 			this.otherPlayer.updateEnemyBoardAfterShoot(this.singlePlayerBoard);
 			
-			this.singlePlayer.setEnemyLife(this.singlePlayer.lifeLeft(this.singlePlayer.getEnemyBoard()));
-			this.otherPlayer.setEnemyLife(this.singlePlayer.lifeLeft(this.singlePlayer.getMyBoard()));
-			
 			this.singlePlayer.changeTextVisibility();
 
 			Thread gameThread = new Thread(this::playGame);
 			gameThread.start();
 		} else {
+			this.singlePlayer = new SinglePlayer(stage, false);
+
 			switch (gameType) {
 				case SINGLEPLAYER:
 					otherPlayer = new AIPlayer();
@@ -146,16 +145,11 @@ public class Controller {
 				waitWhileShoot(this.otherPlayer);
 				this.singlePlayerBoard = this.otherPlayer.getEnemyBoard();
 				this.singlePlayer.updateMyBoardAfterShoot(this.singlePlayerBoard);
-				this.otherPlayer.updateEnemyBoardAfterShoot(this.singlePlayerBoard);
 				this.singlePlayer.changeText();
-				if (this.singlePlayerBoard.isShotDone()) {
-					this.otherPlayer.updateEnemyLife();
-				}
-				if (otherPlayer.getEnemyLife() == 0) {
+				if (singlePlayer.getLife() == 0) {
 					this.singlePlayer.createEndButton(false);
 					break;
 				}
-
 
 				// Single player turn
 				System.out.println("Waiting for player to shoot");
@@ -165,13 +159,10 @@ public class Controller {
 				this.singlePlayer.updateEnemyBoardAfterShoot(this.otherBoard);
 				this.otherPlayer.updateMyBoardAfterShoot(this.otherBoard);
 				this.singlePlayer.changeText();
-				if (this.otherBoard.isShotDone()) {
-					this.singlePlayer.updateEnemyLife();
-				}
-				if (singlePlayer.getEnemyLife() == 0) {
+				if (otherPlayer.getLife() == 0) {
 					this.singlePlayer.createEndButton(true);
+					break;
 				}
-
 
 			} else {
 				// Single player turn
@@ -182,11 +173,9 @@ public class Controller {
 				this.singlePlayer.updateEnemyBoardAfterShoot(this.otherBoard);
 				this.otherPlayer.updateMyBoardAfterShoot(this.otherBoard);
 				this.singlePlayer.changeText();
-				if (this.otherBoard.isShotDone()) {
-					this.singlePlayer.updateEnemyLife();
-				}
-				if (singlePlayer.getEnemyLife() == 0) {
+				if (otherPlayer.getLife() == 0) {
 					this.singlePlayer.createEndButton(true);
+					break;
 				}
 
 				// Other player turn
@@ -195,12 +184,9 @@ public class Controller {
 				waitWhileShoot(this.otherPlayer);
 				this.singlePlayerBoard = this.otherPlayer.getEnemyBoard();
 				this.singlePlayer.updateMyBoardAfterShoot(this.singlePlayerBoard);
-				this.otherPlayer.updateEnemyBoardAfterShoot(this.singlePlayerBoard);
+//				this.otherPlayer.updateEnemyBoardAfterShoot(this.singlePlayerBoard);
 				this.singlePlayer.changeText();
-				if (this.singlePlayerBoard.isShotDone()) {
-					this.otherPlayer.updateEnemyLife();
-				}
-				if (otherPlayer.getEnemyLife() == 0) {
+				if (singlePlayer.getLife() == 0) {
 					this.singlePlayer.createEndButton(false);
 					break;
 				}
