@@ -1,24 +1,8 @@
 package game;
 
-import AI.BattleshipAI;
-import game.Game;
-import game.Ship;
-import game.Player;
-import game.Board;
-import game.BoardCell;
-import game.ShipPart;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import gui.MenuView;
-
-import java.beans.XMLDecoder;
-import java.beans.XMLEncoder;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.FilterOutputStream;
-import java.util.Scanner;
 
 
 public class Main extends Application {

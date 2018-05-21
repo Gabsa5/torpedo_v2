@@ -15,9 +15,12 @@ import javafx.stage.Stage;
 public class MultiplayerSettingsView {
 	private Stage stage;
 	private Pane root;
+	private Controller controller;
+	private String ipAddress;
 
-	public MultiplayerSettingsView(Stage s) {
+	public MultiplayerSettingsView(Stage s, Controller controller) {
 		this.stage = s;
+		this.controller = controller;
 	}
 	private Parent createContent() {
 		root = new Pane();
@@ -34,24 +37,17 @@ public class MultiplayerSettingsView {
 		ipField.setTranslateX(310);
 		ipField.setTranslateY(260);
 		
-		Label portLabel = new Label("Add port:");
-		portLabel.setTranslateX(100);
-		portLabel.setTranslateY(300);
-		portLabel.setTextFill(Color.BLACK);
-		portLabel.setFont(Font.font("", FontWeight.BOLD, 30));
-		
-		TextField portField = new TextField();
-		portField.setPrefSize(200, 30);
-		portField.setTranslateX(240);
-		portField.setTranslateY(310);
-		
 		Button submit = new Button("Submit");
 		submit.setTranslateX(100);
 		submit.setTranslateY(350);
 		submit.setPrefSize(80, 20);
+		submit.setOnAction(e -> {
+			this.ipAddress = ipField.getText();
+			this.controller.start(stage, GameType.CLIENT);
+		});
 		
 
-		root.getChildren().addAll(ipLabel, ipField, portLabel, portField, submit);
+		root.getChildren().addAll(ipLabel, ipField, submit);
 
 		return root;
 	}
@@ -62,5 +58,9 @@ public class MultiplayerSettingsView {
 		stage.setScene(scene);
 		stage.setResizable(false);
 		stage.show();
+	}
+
+	public String getIpAddress() {
+		return this.ipAddress;
 	}
 }

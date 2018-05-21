@@ -10,13 +10,8 @@ public class AIPlayer implements Player {
 	private NeuralNetwork neuralNetwork;
 	private int enemyLife = 19;
 
-	public void setEnemyLife(int life) {
-		this.enemyLife = life;
-	}
-
-	public void setEnemyLife() {
-		this.enemyLife = enemyLife - 1;
-	}
+	private Board myBoard;
+	private Board enemyBoard;
 
 	public AIPlayer() {
 		try {
@@ -24,6 +19,24 @@ public class AIPlayer implements Player {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public void setEnemyLife(int life) {
+		this.enemyLife = life;
+	}
+
+	@Override
+	public Board getMyBoard() {
+		return this.myBoard;
+	}
+
+	@Override
+	public Board getEnemyBoard() {
+		return this.enemyBoard;
+	}
+
+	public void updateEnemyLife() {
+		this.enemyLife = enemyLife - 1;
 	}
 
 	@Override
@@ -35,22 +48,24 @@ public class AIPlayer implements Player {
 		battleshipAI.addRandomShip(3);
 		battleshipAI.addRandomShip(4);
 		battleshipAI.addRandomShip(5);
+		this.myBoard = board;
 	}
 
 	@Override
 	public void shoot(Board board) {
 		int cellIndex = neuralNetwork.nextStep(board);
 		board.shootShip(cellIndex);
+		this.enemyBoard = board;
 	}
 
 	@Override
-	public void updateMyBoard(Board board) {
-
+	public void setMyBoard(Board board) {
+		this.myBoard = board;
 	}
 
 	@Override
-	public void updateEnemyBoard(Board board) {
-
+	public void setEnemyBoard(Board board) {
+		this.enemyBoard = board;
 	}
 
 
@@ -67,11 +82,10 @@ public class AIPlayer implements Player {
 	@Override
 	public int getEnemyLife() {
 		return this.enemyLife;
-		
 	}
+
 	@Override
 	public void createEndButton(boolean isWin) {
-		
 		
 	}
 	

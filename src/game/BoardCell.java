@@ -1,6 +1,8 @@
 package game;
 
-public class BoardCell {
+import java.io.Serializable;
+
+public class BoardCell implements Serializable {
 	
 	//Properties of BoardCell
 	private int cellIndex;

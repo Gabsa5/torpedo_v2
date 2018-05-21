@@ -24,11 +24,11 @@ public class SinglePlayer implements Player {
 	@Override
 	public void placeShips(Board board) {
 		this.myBoard = board;
-		gameView.createUnPlacedShip(2);
-		gameView.createUnPlacedShip(2);
-		gameView.createUnPlacedShip(3);
-		gameView.createUnPlacedShip(3);
-		gameView.createUnPlacedShip(4);
+//		gameView.createUnPlacedShip(2);
+//		gameView.createUnPlacedShip(2);
+//		gameView.createUnPlacedShip(3);
+//		gameView.createUnPlacedShip(3);
+//		gameView.createUnPlacedShip(4);
 		gameView.createUnPlacedShip(5);
 	}
 
@@ -37,18 +37,18 @@ public class SinglePlayer implements Player {
 		this.enemyBoard = board;
 		this.readyWithShoot = false;
 		this.gameView.shoot();
-
- 		// TODO
 	}
 
 	@Override
-	public void updateMyBoard(Board board) {
+	public void setMyBoard(Board board) {
 		this.gameView.redrawMyBoard(board);
+		this.myBoard = board;
 	}
 
 	@Override
-	public void updateEnemyBoard(Board board) {
+	public void setEnemyBoard(Board board) {
 		this.gameView.redrawEnemyBoard(board);
+		this.enemyBoard = board;
 	}
 
 	@Override
@@ -76,7 +76,7 @@ public class SinglePlayer implements Player {
 		}
 	}
 
-	public void setEnemyLife() {
+	public void updateEnemyLife() {
 		this.enemyLife = enemyLife - 1;
 		
 	}
@@ -97,23 +97,18 @@ public class SinglePlayer implements Player {
 		
 	}
 
-	public void setMyBoard(Board myBoard) {
-		this.myBoard = myBoard;
-	}
-
-	public void setEnemyBoard(Board board) {
-		this.enemyBoard = board;
-	}
-
+	@Override
 	public Board getMyBoard() {
 		return myBoard;
 	}
 
+	@Override
 	public Board getEnemyBoard() {
 		return enemyBoard;
 	}
 
 	public void shipDrawContinue() {
+		this.readyWithShipPlacement = true;
 		this.gameView.shipDrawContinue();
 	}
 	

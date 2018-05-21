@@ -1,4 +1,5 @@
 package game;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /* ToDos
@@ -6,7 +7,7 @@ import java.util.ArrayList;
  * JavaDoc írás
  */
 
-public class Ship {
+public class Ship implements Serializable {
 	
 	//Properties of Ship class
 	private int shipStartIndex;

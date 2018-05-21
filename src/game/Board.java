@@ -1,8 +1,9 @@
 package game;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Board {
+public class Board implements Serializable {
 
 	//Properties of Board class
 	private int boardSize;

@@ -1,6 +1,8 @@
 package game;
 
-public class ShipPart {
+import java.io.Serializable;
+
+public class ShipPart implements Serializable {
 	
 	//Properties of ShipPart
 	private boolean isUnshooted;

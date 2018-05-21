@@ -6,22 +6,38 @@ import java.io.FileInputStream;
 import java.util.ArrayList;
 
 import game.AIPlayer;
-import game.Game;
-import game.MultiPlayer;
+import game.MultiPlayerClient;
+import game.MultiPlayerServer;
 import game.Player;
 import game.SinglePlayer;
 import game.Board;
 import javafx.stage.Stage;
 
 public class Controller {
-	private Game game;
+	private MultiplayerSettingsView multiplayerSettingsView;
+
 	private SinglePlayer singlePlayer;
 	private Player otherPlayer;
 
-	public void start(Stage stage, GameType gameType) {
-		if(gameType.equals(GameType.CONTINUE)) {
-			this.game = new Game(10);
+	private Board singlePlayerBoard;
+	private Board otherBoard;
 
+	private GameType gameType;
+
+	public void networkSettings(Stage stage) {
+		// Multiplayer Client
+		multiplayerSettingsView = new MultiplayerSettingsView(stage, this);
+		multiplayerSettingsView.build();
+	}
+
+	public void start(Stage stage, GameType gameType) {
+
+		this.singlePlayerBoard = new Board(10);
+		this.otherBoard = new Board(10);
+		this.singlePlayer = new SinglePlayer(stage);
+		this.gameType = gameType;
+
+		if(gameType.equals(GameType.CONTINUE)) {
 			
 			try {
 				FileInputStream fis = new FileInputStream(new File("./singleBoard.xml"));
@@ -34,11 +50,10 @@ public class Controller {
 				ArrayList<Board> boards = new ArrayList<Board>();
 				boards.add(((Board)decoder.readObject()));
 				boards.add(((Board)decoder2.readObject()));
-			
-				
-				game.setBoards(boards);
-				
-				this.singlePlayer = new SinglePlayer(stage);
+
+				this.singlePlayerBoard = boards.get(0);
+				this.otherBoard = boards.get(1);
+
 				this.otherPlayer = new AIPlayer();
 				
 				this.singlePlayer.setMyBoard(boards.get(0));
@@ -49,177 +64,166 @@ public class Controller {
 				fis.close();
 				decoder2.close();
 				fis2.close();
-				
-				
-				
 			}
 			catch (Exception ex) {
 				ex.printStackTrace();
 			}
 			
 			System.out.println("Single Player Board:");
-			this.game.getSinglePlayerBoard().prettyPrint();
+			this.singlePlayerBoard.prettyPrint();
 
 			System.out.println("Other Player Board:");
-			this.game.getOtherBoard().prettyPrint();
+			this.otherBoard.prettyPrint();
 			
 
 			
-			this.singlePlayer.updateEnemyBoard(this.game.getOtherBoard());
-			this.otherPlayer.updateMyBoard(this.game.getOtherBoard());
+			this.singlePlayer.setEnemyBoard(this.otherBoard);
+			this.otherPlayer.setMyBoard(this.otherBoard);
 			
 			this.singlePlayer.shipDrawContinue();
 			
-			this.singlePlayer.updateMyBoard(this.game.getSinglePlayerBoard());
-			this.otherPlayer.updateEnemyBoard(this.game.getSinglePlayerBoard());
+			this.singlePlayer.setMyBoard(this.singlePlayerBoard);
+			this.otherPlayer.setEnemyBoard(this.singlePlayerBoard);
 			
 			this.singlePlayer.setEnemyLife(this.singlePlayer.lifeLeft(this.singlePlayer.getEnemyBoard()));
 			this.otherPlayer.setEnemyLife(this.singlePlayer.lifeLeft(this.singlePlayer.getMyBoard()));
 			
 			this.singlePlayer.changeTextVisibility();
-			
-			Thread gameThread = new Thread(() -> {
 
-				System.out.println("Single Player Board:");
-				this.game.getSinglePlayerBoard().prettyPrint();
-
-				System.out.println("Other Player Board:");
-				this.game.getOtherBoard().prettyPrint();
-
-				// Start shooting part
-				while (true) {
-					// Single player turn
-					this.singlePlayer.shoot(this.game.getOtherBoard());
-					waitWhileShoot(this.singlePlayer);
-					this.singlePlayer.updateEnemyBoard(this.game.getOtherBoard());
-					this.otherPlayer.updateMyBoard(this.game.getOtherBoard());
-					if(game.getOtherBoard().isShotDone()) {
-						this.singlePlayer.setEnemyLife();
-					}
-					if(singlePlayer.getEnemyLife() == 0) {
-						this.singlePlayer.createEndButton(true);
-					}else
-						this.singlePlayer.changeTextVisibility();
-					// TODO check if game is over
-
-					// Other player turn
-					this.otherPlayer.shoot(this.game.getSinglePlayerBoard());
-					waitWhileShoot(this.otherPlayer);
-					this.singlePlayer.updateMyBoard(this.game.getSinglePlayerBoard());
-					this.otherPlayer.updateEnemyBoard(this.game.getSinglePlayerBoard());
-					System.out.println(this.otherPlayer.getEnemyLife());
-					if(game.getSinglePlayerBoard().isShotDone()) {
-						this.otherPlayer.setEnemyLife();
-					}
-					if(otherPlayer.getEnemyLife() == 0) {
-						this.singlePlayer.createEndButton(false);
-					}else
-						this.singlePlayer.changeTextVisibility();
-					// TODO check if game is over
-
-					System.out.println("Single Player Board:");
-					this.game.getSinglePlayerBoard().prettyPrint();
-
-					System.out.println("Other Player Board:");
-					this.game.getOtherBoard().prettyPrint();
-				}
-
-			});
-			
+			Thread gameThread = new Thread(this::playGame);
 			gameThread.start();
-			
-			
-		}
-		else if (gameType.equals(GameType.CLIENT)) {
-			MultiplayerSettingsView multiplayerSettingsView = new MultiplayerSettingsView(stage);
-			multiplayerSettingsView.build();
 		} else {
-			this.game = new Game(10);
-			this.singlePlayer = new SinglePlayer(stage);
 			switch (gameType) {
 				case SINGLEPLAYER:
 					otherPlayer = new AIPlayer();
 					break;
-				case SERVER:
-					otherPlayer = new MultiPlayer();
-					break;
 				case CLIENT:
-					otherPlayer = new MultiPlayer();
+					String ipAddress = multiplayerSettingsView.getIpAddress();
+					otherPlayer = new MultiPlayerClient(ipAddress);
+					break;
+				case SERVER:
+					otherPlayer = new MultiPlayerServer();
 					break;
 			}
 
-			singlePlayer.placeShips(game.getSinglePlayerBoard());
-			otherPlayer.placeShips(game.getOtherBoard());
-			
+			singlePlayer.placeShips(this.singlePlayerBoard);
+			otherPlayer.placeShips(this.otherBoard);
 
-			Thread gameThread = new Thread(() -> {
-				
-				waitWhileShipPlacement();
-
-				System.out.println("Single Player Board:");
-				this.game.getSinglePlayerBoard().prettyPrint();
-
-				System.out.println("Other Player Board:");
-				this.game.getOtherBoard().prettyPrint();
-				
-				this.singlePlayer.changeTextVisibility();
-				
-
-				// Start shooting part
-				while (true) {
-					// Single player turn
-					this.singlePlayer.shoot(this.game.getOtherBoard());
-					waitWhileShoot(this.singlePlayer);
-					this.singlePlayer.updateEnemyBoard(this.game.getOtherBoard());
-					this.otherPlayer.updateMyBoard(this.game.getOtherBoard());
-					this.singlePlayer.changeText();
-					if(game.getOtherBoard().isShotDone()) {
-						this.singlePlayer.setEnemyLife();
-					}
-					if(singlePlayer.getEnemyLife() == 0) {
-						this.singlePlayer.createEndButton(true);
-					}
-					// TODO check if game is over
-
-					// Other player turn
-					this.otherPlayer.shoot(this.game.getSinglePlayerBoard());
-					waitWhileShoot(this.otherPlayer);
-					this.singlePlayer.updateMyBoard(this.game.getSinglePlayerBoard());
-					this.otherPlayer.updateEnemyBoard(this.game.getSinglePlayerBoard());
-					this.singlePlayer.changeText();
-					if(game.getSinglePlayerBoard().isShotDone()) {
-						this.otherPlayer.setEnemyLife();
-					}
-					if(otherPlayer.getEnemyLife() == 0) {
-						this.singlePlayer.createEndButton(false);
-						break;
-					}
-					// TODO check if game is over
-
-					System.out.println("Single Player Board:");
-					this.game.getSinglePlayerBoard().prettyPrint();
-
-					System.out.println("Other Player Board:");
-					this.game.getOtherBoard().prettyPrint();
-				}
-
-			});
-			
+			Thread gameThread = new Thread(this::playGame);
 			gameThread.start();
-
 		}
 	}
 
-	private void waitWhileShipPlacement() {
+	private void playGame() {
+
+		waitWhileShipPlacement(this.singlePlayer);
+		this.singlePlayerBoard = singlePlayer.getMyBoard();
+		this.otherPlayer.setEnemyBoard(this.singlePlayerBoard);
+
+		// TODO: show 'Waiting for other' text
+		waitWhileShipPlacement(this.otherPlayer);
+		// TODO: hide 'Waiting for other' text
+		this.otherBoard = otherPlayer.getMyBoard();
+		this.singlePlayer.setEnemyBoard(this.otherBoard);
+
+
+		System.out.println("Single Player Board:");
+		this.singlePlayerBoard.prettyPrint();
+
+		System.out.println("Other Player Board:");
+		this.otherBoard.prettyPrint();
+
+		this.singlePlayer.changeTextVisibility();
+
+		// Start shooting part
+		while (true) {
+			if (this.gameType.equals(GameType.CLIENT)) {
+				this.singlePlayer.changeText();
+
+				// Server shoots
+				System.out.println("Waiting for other player to shoot");
+				this.otherPlayer.shoot(this.singlePlayerBoard);
+				waitWhileShoot(this.otherPlayer);
+				this.singlePlayerBoard = this.otherPlayer.getEnemyBoard();
+				this.singlePlayer.setMyBoard(this.singlePlayerBoard);
+				//this.otherPlayer.setEnemyBoard(this.singlePlayerBoard);
+				this.singlePlayer.changeText();
+				if (this.singlePlayerBoard.isShotDone()) {
+					this.otherPlayer.updateEnemyLife();
+				}
+				if (otherPlayer.getEnemyLife() == 0) {
+					this.singlePlayer.createEndButton(false);
+					break;
+				}
+
+
+				// Single player turn
+				System.out.println("Waiting for player to shoot");
+				this.singlePlayer.shoot(this.otherBoard);
+				waitWhileShoot(this.singlePlayer);
+				this.otherBoard = this.singlePlayer.getEnemyBoard();
+				this.singlePlayer.setEnemyBoard(this.otherBoard);
+				this.otherPlayer.setMyBoard(this.otherBoard);
+				this.singlePlayer.changeText();
+				if (this.otherBoard.isShotDone()) {
+					this.singlePlayer.updateEnemyLife();
+				}
+				if (singlePlayer.getEnemyLife() == 0) {
+					this.singlePlayer.createEndButton(true);
+				}
+
+
+			} else {
+				// Single player turn
+				System.out.println("Waiting for player to shoot");
+				this.singlePlayer.shoot(this.otherBoard);
+				waitWhileShoot(this.singlePlayer);
+				this.otherBoard = this.singlePlayer.getEnemyBoard();
+				this.singlePlayer.setEnemyBoard(this.otherBoard);
+				this.otherPlayer.setMyBoard(this.otherBoard);
+				this.singlePlayer.changeText();
+				if (this.otherBoard.isShotDone()) {
+					this.singlePlayer.updateEnemyLife();
+				}
+				if (singlePlayer.getEnemyLife() == 0) {
+					this.singlePlayer.createEndButton(true);
+				}
+
+				// Other player turn
+				System.out.println("Waiting for other player to shoot");
+				this.otherPlayer.shoot(this.singlePlayerBoard);
+				waitWhileShoot(this.otherPlayer);
+				this.singlePlayerBoard = this.otherPlayer.getEnemyBoard();
+				this.singlePlayer.setMyBoard(this.singlePlayerBoard);
+				this.otherPlayer.setEnemyBoard(this.singlePlayerBoard);
+				this.singlePlayer.changeText();
+				if (this.singlePlayerBoard.isShotDone()) {
+					this.otherPlayer.updateEnemyLife();
+				}
+				if (otherPlayer.getEnemyLife() == 0) {
+					this.singlePlayer.createEndButton(false);
+					break;
+				}
+			}
+
+			System.out.println("Single Player Board:");
+			this.singlePlayerBoard.prettyPrint();
+
+			System.out.println("Other Player Board:");
+			this.otherBoard.prettyPrint();
+		}
+	}
+
+	private void waitWhileShipPlacement(Player player) {
 		// TODO check player timeout
 		while (true) {
-			if (singlePlayer.isReadyWithPlaceShips() && otherPlayer.isReadyWithPlaceShips()) {
+			if (player.isReadyWithPlaceShips()) {
 				break;
 			}
 			try {
 				Thread.sleep(500);
 			} catch (InterruptedException e) {
-				
+
 				e.printStackTrace();
 			}
 		}

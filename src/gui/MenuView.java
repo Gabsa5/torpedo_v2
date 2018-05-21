@@ -44,8 +44,8 @@ public class MenuView {
 		menuBox = new VBox(10,
 				new MenuItem("New SinglePlayer"),
 				new MenuItem("Continue"),
-				new MenuItem("MultiPlayer Server"),
-				new MenuItem("MultiPlayer Client"),
+				new MenuItem("MultiPlayerServer Server"),
+				new MenuItem("MultiPlayerServer Client"),
 				itemExit);
 		menuBox.setAlignment(Pos.TOP_CENTER);
 		menuBox.setTranslateX(350);
@@ -86,10 +86,10 @@ public class MenuView {
     			case "Continue":
     				controller.start(s, GameType.CONTINUE);
     				break;
-    			case "MultiPlayer Client":
-					controller.start(s, GameType.CLIENT);
+    			case "MultiPlayerServer Client":
+					controller.networkSettings(s);
     				break;
-    			case "MultiPlayer Server":
+    			case "MultiPlayerServer Server":
     				controller.start(s, GameType.SERVER);
     				break;
     			}
