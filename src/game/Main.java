@@ -18,35 +18,6 @@ public class Main extends Application {
 	public static void main(String[] args) {
 		launch(args);
 
-//		Board board = new Board(10);
-//
-//		BattleshipAI battleshipAI = new BattleshipAI(board);
-//
-//		battleshipAI.addRandomShip(5);
-//		battleshipAI.addRandomShip(4);
-//		battleshipAI.addRandomShip(3);
-//		battleshipAI.addRandomShip(3);
-//		battleshipAI.addRandomShip(2);
-//		battleshipAI.addRandomShip(2);
-//
-//		board.prettyPrint();
-//
-//		Player player = new AIPlayer();
-//
-//		player.shoot(board);
-//		board.prettyPrint();
-//
-//		player.shoot(board);
-//		board.prettyPrint();
-//
-//		player.shoot(board);
-//		board.prettyPrint();
-//
-//		player.shoot(board);
-//		board.prettyPrint();
-//
-//		player.shoot(board);
-//		board.prettyPrint();
 	}
 
 }

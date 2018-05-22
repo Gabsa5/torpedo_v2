@@ -48,8 +48,8 @@ public class MenuView {
 				new MenuItem("MultiPlayerServer Client"),
 				itemExit);
 		menuBox.setAlignment(Pos.TOP_CENTER);
-		menuBox.setTranslateX(350);
-        menuBox.setTranslateY(230);
+		menuBox.setTranslateX(300);
+        menuBox.setTranslateY(200);
 
 		
 		getMenuItem(0).setActive(true);

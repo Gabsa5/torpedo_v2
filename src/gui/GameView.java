@@ -189,19 +189,18 @@ public class GameView {
 	}
 	
 	public void changeMyTurn() {
+		Platform.runLater(() ->{
 		if(myTurnText.getText() == "My turn!") {
-			Platform.runLater(() -> {
 			myTurnText.setText("Enemy's turn!");
 			myTurnText.setTextFill(Color.INDIANRED);
 			this.enemyCellRects.forEach(rect -> rect.setDisable(true));
-			});
+			
 		}else {
-			Platform.runLater(() -> {
 			myTurnText.setText("My turn!");
 			myTurnText.setTextFill(Color.DARKOLIVEGREEN);
 			this.enemyCellRects.forEach(rect -> rect.setDisable(false));
-			});
-		}
+			}
+		});
 	}
 
 	public void createUnPlacedShip(int l) {

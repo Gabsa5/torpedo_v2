@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<java version="1.8.0_162" class="java.beans.XMLDecoder">
+<java version="10.0.1" class="java.beans.XMLDecoder">
  <object class="game.Board" id="Board0">
   <void property="boardSize">
    <int>10</int>
@@ -10,56 +10,12 @@
   <void property="cells">
    <object class="java.util.ArrayList">
     <void method="add">
-     <object class="game.BoardCell">
-      <void property="shipPart">
-       <object class="game.ShipPart" id="ShipPart0">
-        <void property="isUnshooted">
-         <boolean>true</boolean>
-        </void>
-        <void property="ship">
-         <object class="game.Ship" id="Ship0">
-          <void property="shipEndIndex">
-           <int>1</int>
-          </void>
-          <void property="shipParts">
-           <object class="java.util.ArrayList">
-            <void method="add">
-             <object idref="ShipPart0"/>
-            </void>
-            <void method="add">
-             <object class="game.ShipPart" id="ShipPart1">
-              <void property="isUnshooted">
-               <boolean>true</boolean>
-              </void>
-              <void property="ship">
-               <object idref="Ship0"/>
-              </void>
-              <void property="shipPartIndex">
-               <int>1</int>
-              </void>
-             </object>
-            </void>
-           </object>
-          </void>
-          <void property="shipSize">
-           <int>2</int>
-          </void>
-          <void property="shipSizeDiff">
-           <int>1</int>
-          </void>
-         </object>
-        </void>
-       </object>
-      </void>
-     </object>
+     <object class="game.BoardCell"/>
     </void>
     <void method="add">
      <object class="game.BoardCell">
       <void property="cellIndex">
        <int>1</int>
-      </void>
-      <void property="shipPart">
-       <object idref="ShipPart1"/>
       </void>
      </object>
     </void>
@@ -131,6 +87,9 @@
       <void property="cellIndex">
        <int>11</int>
       </void>
+      <void property="isShootedCell">
+       <boolean>true</boolean>
+      </void>
      </object>
     </void>
     <void method="add">
@@ -144,9 +103,6 @@
      <object class="game.BoardCell">
       <void property="cellIndex">
        <int>13</int>
-      </void>
-      <void property="isShootedCell">
-       <boolean>true</boolean>
       </void>
      </object>
     </void>
@@ -169,82 +125,62 @@
       <void property="cellIndex">
        <int>16</int>
       </void>
-     </object>
-    </void>
-    <void method="add">
-     <object class="game.BoardCell">
-      <void property="cellIndex">
-       <int>17</int>
-      </void>
       <void property="shipPart">
-       <object class="game.ShipPart" id="ShipPart2">
+       <object class="game.ShipPart" id="ShipPart0">
         <void property="isUnshooted">
          <boolean>true</boolean>
         </void>
         <void property="ship">
-         <object class="game.Ship" id="Ship1">
+         <object class="game.Ship" id="Ship0">
           <void property="shipEndIndex">
-           <int>47</int>
+           <int>18</int>
           </void>
           <void property="shipParts">
            <object class="java.util.ArrayList">
             <void method="add">
-             <object idref="ShipPart2"/>
+             <object idref="ShipPart0"/>
             </void>
             <void method="add">
-             <object class="game.ShipPart" id="ShipPart3">
+             <object class="game.ShipPart" id="ShipPart1">
               <void property="isUnshooted">
                <boolean>true</boolean>
               </void>
               <void property="ship">
-               <object idref="Ship1"/>
+               <object idref="Ship0"/>
               </void>
               <void property="shipPartIndex">
-               <int>27</int>
+               <int>17</int>
               </void>
              </object>
             </void>
             <void method="add">
-             <object class="game.ShipPart" id="ShipPart4">
+             <object class="game.ShipPart" id="ShipPart2">
               <void property="isUnshooted">
                <boolean>true</boolean>
               </void>
               <void property="ship">
-               <object idref="Ship1"/>
+               <object idref="Ship0"/>
               </void>
               <void property="shipPartIndex">
-               <int>37</int>
-              </void>
-             </object>
-            </void>
-            <void method="add">
-             <object class="game.ShipPart" id="ShipPart5">
-              <void property="isUnshooted">
-               <boolean>true</boolean>
-              </void>
-              <void property="ship">
-               <object idref="Ship1"/>
-              </void>
-              <void property="shipPartIndex">
-               <int>47</int>
+               <int>18</int>
               </void>
              </object>
             </void>
            </object>
           </void>
           <void property="shipSize">
-           <int>4</int>
+           <int>3</int>
           </void>
           <void property="shipSizeDiff">
-           <int>30</int>
+           <int>2</int>
           </void>
           <void property="shipStartIndex">
-           <int>17</int>
+           <int>16</int>
           </void>
          </object>
         </void>
         <void property="shipPartIndex">
-         <int>17</int>
+         <int>16</int>
         </void>
        </object>
       </void>
@@ -253,7 +189,20 @@
     <void method="add">
      <object class="game.BoardCell">
       <void property="cellIndex">
+       <int>17</int>
+      </void>
+      <void property="shipPart">
+       <object idref="ShipPart1"/>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="game.BoardCell">
+      <void property="cellIndex">
        <int>18</int>
+      </void>
+      <void property="shipPart">
+       <object idref="ShipPart2"/>
       </void>
      </object>
     </void>
@@ -276,6 +225,59 @@
       <void property="cellIndex">
        <int>21</int>
       </void>
+      <void property="isShootedCell">
+       <boolean>true</boolean>
+      </void>
+      <void property="shipPart">
+       <object class="game.ShipPart" id="ShipPart3">
+        <void property="ship">
+         <object class="game.Ship" id="Ship1">
+          <void property="shipEndIndex">
+           <int>41</int>
+          </void>
+          <void property="shipParts">
+           <object class="java.util.ArrayList">
+            <void method="add">
+             <object idref="ShipPart3"/>
+            </void>
+            <void method="add">
+             <object class="game.ShipPart" id="ShipPart4">
+              <void property="ship">
+               <object idref="Ship1"/>
+              </void>
+              <void property="shipPartIndex">
+               <int>31</int>
+              </void>
+             </object>
+            </void>
+            <void method="add">
+             <object class="game.ShipPart" id="ShipPart5">
+              <void property="ship">
+               <object idref="Ship1"/>
+              </void>
+              <void property="shipPartIndex">
+               <int>41</int>
+              </void>
+             </object>
+            </void>
+           </object>
+          </void>
+          <void property="shipSize">
+           <int>3</int>
+          </void>
+          <void property="shipSizeDiff">
+           <int>20</int>
+          </void>
+          <void property="shipStartIndex">
+           <int>21</int>
+          </void>
+         </object>
+        </void>
+        <void property="shipPartIndex">
+         <int>21</int>
+        </void>
+       </object>
+      </void>
      </object>
     </void>
     <void method="add">
@@ -283,58 +285,12 @@
       <void property="cellIndex">
        <int>22</int>
       </void>
-      <void property="isShootedCell">
-       <boolean>true</boolean>
-      </void>
      </object>
     </void>
     <void method="add">
      <object class="game.BoardCell">
       <void property="cellIndex">
        <int>23</int>
-      </void>
-      <void property="isShootedCell">
-       <boolean>true</boolean>
-      </void>
-      <void property="shipPart">
-       <object class="game.ShipPart" id="ShipPart6">
-        <void property="ship">
-         <object class="game.Ship" id="Ship2">
-          <void property="shipEndIndex">
-           <int>24</int>
-          </void>
-          <void property="shipParts">
-           <object class="java.util.ArrayList">
-            <void method="add">
-             <object idref="ShipPart6"/>
-            </void>
-            <void method="add">
-             <object class="game.ShipPart" id="ShipPart7">
-              <void property="ship">
-               <object idref="Ship2"/>
-              </void>
-              <void property="shipPartIndex">
-               <int>24</int>
-              </void>
-             </object>
-            </void>
-           </object>
-          </void>
-          <void property="shipSize">
-           <int>2</int>
-          </void>
-          <void property="shipSizeDiff">
-           <int>1</int>
-          </void>
-          <void property="shipStartIndex">
-           <int>23</int>
-          </void>
-         </object>
-        </void>
-        <void property="shipPartIndex">
-         <int>23</int>
-        </void>
-       </object>
       </void>
      </object>
     </void>
@@ -346,18 +302,12 @@
       <void property="isShootedCell">
        <boolean>true</boolean>
       </void>
-      <void property="shipPart">
-       <object idref="ShipPart7"/>
-      </void>
      </object>
     </void>
     <void method="add">
      <object class="game.BoardCell">
       <void property="cellIndex">
        <int>25</int>
-      </void>
-      <void property="isShootedCell">
-       <boolean>true</boolean>
       </void>
      </object>
     </void>
@@ -372,9 +322,6 @@
      <object class="game.BoardCell">
       <void property="cellIndex">
        <int>27</int>
-      </void>
-      <void property="shipPart">
-       <object idref="ShipPart3"/>
       </void>
      </object>
     </void>
@@ -397,6 +344,9 @@
       <void property="cellIndex">
        <int>30</int>
       </void>
+      <void property="isShootedCell">
+       <boolean>true</boolean>
+      </void>
      </object>
     </void>
     <void method="add">
@@ -404,12 +354,21 @@
       <void property="cellIndex">
        <int>31</int>
       </void>
+      <void property="isShootedCell">
+       <boolean>true</boolean>
+      </void>
+      <void property="shipPart">
+       <object idref="ShipPart4"/>
+      </void>
      </object>
     </void>
     <void method="add">
      <object class="game.BoardCell">
       <void property="cellIndex">
        <int>32</int>
+      </void>
+      <void property="isShootedCell">
+       <boolean>true</boolean>
       </void>
      </object>
     </void>
@@ -425,6 +384,78 @@
       <void property="cellIndex">
        <int>34</int>
       </void>
+      <void property="shipPart">
+       <object class="game.ShipPart" id="ShipPart6">
+        <void property="isUnshooted">
+         <boolean>true</boolean>
+        </void>
+        <void property="ship">
+         <object class="game.Ship" id="Ship2">
+          <void property="shipEndIndex">
+           <int>37</int>
+          </void>
+          <void property="shipParts">
+           <object class="java.util.ArrayList">
+            <void method="add">
+             <object idref="ShipPart6"/>
+            </void>
+            <void method="add">
+             <object class="game.ShipPart" id="ShipPart7">
+              <void property="isUnshooted">
+               <boolean>true</boolean>
+              </void>
+              <void property="ship">
+               <object idref="Ship2"/>
+              </void>
+              <void property="shipPartIndex">
+               <int>35</int>
+              </void>
+             </object>
+            </void>
+            <void method="add">
+             <object class="game.ShipPart" id="ShipPart8">
+              <void property="isUnshooted">
+               <boolean>true</boolean>
+              </void>
+              <void property="ship">
+               <object idref="Ship2"/>
+              </void>
+              <void property="shipPartIndex">
+               <int>36</int>
+              </void>
+             </object>
+            </void>
+            <void method="add">
+             <object class="game.ShipPart" id="ShipPart9">
+              <void property="isUnshooted">
+               <boolean>true</boolean>
+              </void>
+              <void property="ship">
+               <object idref="Ship2"/>
+              </void>
+              <void property="shipPartIndex">
+               <int>37</int>
+              </void>
+             </object>
+            </void>
+           </object>
+          </void>
+          <void property="shipSize">
+           <int>4</int>
+          </void>
+          <void property="shipSizeDiff">
+           <int>3</int>
+          </void>
+          <void property="shipStartIndex">
+           <int>34</int>
+          </void>
+         </object>
+        </void>
+        <void property="shipPartIndex">
+         <int>34</int>
+        </void>
+       </object>
+      </void>
      </object>
     </void>
     <void method="add">
@@ -432,12 +463,18 @@
       <void property="cellIndex">
        <int>35</int>
       </void>
+      <void property="shipPart">
+       <object idref="ShipPart7"/>
+      </void>
      </object>
     </void>
     <void method="add">
      <object class="game.BoardCell">
       <void property="cellIndex">
        <int>36</int>
+      </void>
+      <void property="shipPart">
+       <object idref="ShipPart8"/>
       </void>
      </object>
     </void>
@@ -447,7 +484,7 @@
        <int>37</int>
       </void>
       <void property="shipPart">
-       <object idref="ShipPart4"/>
+       <object idref="ShipPart9"/>
       </void>
      </object>
     </void>
@@ -476,6 +513,12 @@
      <object class="game.BoardCell">
       <void property="cellIndex">
        <int>41</int>
+      </void>
+      <void property="isShootedCell">
+       <boolean>true</boolean>
+      </void>
+      <void property="shipPart">
+       <object idref="ShipPart5"/>
       </void>
      </object>
     </void>
@@ -519,9 +562,6 @@
       <void property="cellIndex">
        <int>47</int>
       </void>
-      <void property="shipPart">
-       <object idref="ShipPart5"/>
-      </void>
      </object>
     </void>
     <void method="add">
@@ -557,6 +597,9 @@
       <void property="cellIndex">
        <int>52</int>
       </void>
+      <void property="isShootedCell">
+       <boolean>true</boolean>
+      </void>
      </object>
     </void>
     <void method="add">
@@ -565,22 +608,22 @@
        <int>53</int>
       </void>
       <void property="shipPart">
-       <object class="game.ShipPart" id="ShipPart8">
+       <object class="game.ShipPart" id="ShipPart10">
         <void property="isUnshooted">
          <boolean>true</boolean>
         </void>
         <void property="ship">
          <object class="game.Ship" id="Ship3">
           <void property="shipEndIndex">
-           <int>55</int>
+           <int>57</int>
           </void>
           <void property="shipParts">
            <object class="java.util.ArrayList">
             <void method="add">
-             <object idref="ShipPart8"/>
+             <object idref="ShipPart10"/>
             </void>
             <void method="add">
-             <object class="game.ShipPart" id="ShipPart9">
+             <object class="game.ShipPart" id="ShipPart11">
               <void property="isUnshooted">
                <boolean>true</boolean>
               </void>
@@ -593,7 +636,7 @@
              </object>
             </void>
             <void method="add">
-             <object class="game.ShipPart" id="ShipPart10">
+             <object class="game.ShipPart" id="ShipPart12">
               <void property="isUnshooted">
                <boolean>true</boolean>
               </void>
@@ -605,13 +648,39 @@
               </void>
              </object>
             </void>
+            <void method="add">
+             <object class="game.ShipPart" id="ShipPart13">
+              <void property="isUnshooted">
+               <boolean>true</boolean>
+              </void>
+              <void property="ship">
+               <object idref="Ship3"/>
+              </void>
+              <void property="shipPartIndex">
+               <int>56</int>
+              </void>
+             </object>
+            </void>
+            <void method="add">
+             <object class="game.ShipPart" id="ShipPart14">
+              <void property="isUnshooted">
+               <boolean>true</boolean>
+              </void>
+              <void property="ship">
+               <object idref="Ship3"/>
+              </void>
+              <void property="shipPartIndex">
+               <int>57</int>
+              </void>
+             </object>
+            </void>
            </object>
           </void>
           <void property="shipSize">
-           <int>3</int>
+           <int>5</int>
           </void>
           <void property="shipSizeDiff">
-           <int>2</int>
+           <int>4</int>
           </void>
           <void property="shipStartIndex">
            <int>53</int>
@@ -631,7 +700,7 @@
        <int>54</int>
       </void>
       <void property="shipPart">
-       <object idref="ShipPart9"/>
+       <object idref="ShipPart11"/>
       </void>
      </object>
     </void>
@@ -641,7 +710,7 @@
        <int>55</int>
       </void>
       <void property="shipPart">
-       <object idref="ShipPart10"/>
+       <object idref="ShipPart12"/>
       </void>
      </object>
     </void>
@@ -650,12 +719,18 @@
       <void property="cellIndex">
        <int>56</int>
       </void>
+      <void property="shipPart">
+       <object idref="ShipPart13"/>
+      </void>
      </object>
     </void>
     <void method="add">
      <object class="game.BoardCell">
       <void property="cellIndex">
        <int>57</int>
+      </void>
+      <void property="shipPart">
+       <object idref="ShipPart14"/>
       </void>
      </object>
     </void>
@@ -751,65 +826,6 @@
       <void property="cellIndex">
        <int>70</int>
       </void>
-      <void property="shipPart">
-       <object class="game.ShipPart" id="ShipPart11">
-        <void property="isUnshooted">
-         <boolean>true</boolean>
-        </void>
-        <void property="ship">
-         <object class="game.Ship" id="Ship4">
-          <void property="shipEndIndex">
-           <int>72</int>
-          </void>
-          <void property="shipParts">
-           <object class="java.util.ArrayList">
-            <void method="add">
-             <object idref="ShipPart11"/>
-            </void>
-            <void method="add">
-             <object class="game.ShipPart" id="ShipPart12">
-              <void property="isUnshooted">
-               <boolean>true</boolean>
-              </void>
-              <void property="ship">
-               <object idref="Ship4"/>
-              </void>
-              <void property="shipPartIndex">
-               <int>71</int>
-              </void>
-             </object>
-            </void>
-            <void method="add">
-             <object class="game.ShipPart" id="ShipPart13">
-              <void property="isUnshooted">
-               <boolean>true</boolean>
-              </void>
-              <void property="ship">
-               <object idref="Ship4"/>
-              </void>
-              <void property="shipPartIndex">
-               <int>72</int>
-              </void>
-             </object>
-            </void>
-           </object>
-          </void>
-          <void property="shipSize">
-           <int>3</int>
-          </void>
-          <void property="shipSizeDiff">
-           <int>2</int>
-          </void>
-          <void property="shipStartIndex">
-           <int>70</int>
-          </void>
-         </object>
-        </void>
-        <void property="shipPartIndex">
-         <int>70</int>
-        </void>
-       </object>
-      </void>
      </object>
     </void>
     <void method="add">
@@ -817,8 +833,8 @@
       <void property="cellIndex">
        <int>71</int>
       </void>
-      <void property="shipPart">
-       <object idref="ShipPart12"/>
+      <void property="isShootedCell">
+       <boolean>true</boolean>
       </void>
      </object>
     </void>
@@ -826,9 +842,6 @@
      <object class="game.BoardCell">
       <void property="cellIndex">
        <int>72</int>
-      </void>
-      <void property="shipPart">
-       <object idref="ShipPart13"/>
       </void>
      </object>
     </void>
@@ -865,12 +878,61 @@
       <void property="cellIndex">
        <int>77</int>
       </void>
+      <void property="shipPart">
+       <object class="game.ShipPart" id="ShipPart15">
+        <void property="isUnshooted">
+         <boolean>true</boolean>
+        </void>
+        <void property="ship">
+         <object class="game.Ship" id="Ship4">
+          <void property="shipEndIndex">
+           <int>87</int>
+          </void>
+          <void property="shipParts">
+           <object class="java.util.ArrayList">
+            <void method="add">
+             <object idref="ShipPart15"/>
+            </void>
+            <void method="add">
+             <object class="game.ShipPart" id="ShipPart16">
+              <void property="isUnshooted">
+               <boolean>true</boolean>
+              </void>
+              <void property="ship">
+               <object idref="Ship4"/>
+              </void>
+              <void property="shipPartIndex">
+               <int>87</int>
+              </void>
+             </object>
+            </void>
+           </object>
+          </void>
+          <void property="shipSize">
+           <int>2</int>
+          </void>
+          <void property="shipSizeDiff">
+           <int>10</int>
+          </void>
+          <void property="shipStartIndex">
+           <int>77</int>
+          </void>
+         </object>
+        </void>
+        <void property="shipPartIndex">
+         <int>77</int>
+        </void>
+       </object>
+      </void>
      </object>
     </void>
     <void method="add">
      <object class="game.BoardCell">
       <void property="cellIndex">
        <int>78</int>
+      </void>
+      <void property="isShootedCell">
+       <boolean>true</boolean>
       </void>
      </object>
     </void>
@@ -886,6 +948,49 @@
       <void property="cellIndex">
        <int>80</int>
       </void>
+      <void property="isShootedCell">
+       <boolean>true</boolean>
+      </void>
+      <void property="shipPart">
+       <object class="game.ShipPart" id="ShipPart17">
+        <void property="ship">
+         <object class="game.Ship" id="Ship5">
+          <void property="shipEndIndex">
+           <int>81</int>
+          </void>
+          <void property="shipParts">
+           <object class="java.util.ArrayList">
+            <void method="add">
+             <object idref="ShipPart17"/>
+            </void>
+            <void method="add">
+             <object class="game.ShipPart" id="ShipPart18">
+              <void property="ship">
+               <object idref="Ship5"/>
+              </void>
+              <void property="shipPartIndex">
+               <int>81</int>
+              </void>
+             </object>
+            </void>
+           </object>
+          </void>
+          <void property="shipSize">
+           <int>2</int>
+          </void>
+          <void property="shipSizeDiff">
+           <int>1</int>
+          </void>
+          <void property="shipStartIndex">
+           <int>80</int>
+          </void>
+         </object>
+        </void>
+        <void property="shipPartIndex">
+         <int>80</int>
+        </void>
+       </object>
+      </void>
      </object>
     </void>
     <void method="add">
@@ -893,12 +998,21 @@
       <void property="cellIndex">
        <int>81</int>
       </void>
+      <void property="isShootedCell">
+       <boolean>true</boolean>
+      </void>
+      <void property="shipPart">
+       <object idref="ShipPart18"/>
+      </void>
      </object>
     </void>
     <void method="add">
      <object class="game.BoardCell">
       <void property="cellIndex">
        <int>82</int>
+      </void>
+      <void property="isShootedCell">
+       <boolean>true</boolean>
       </void>
      </object>
     </void>
@@ -914,91 +1028,6 @@
       <void property="cellIndex">
        <int>84</int>
       </void>
-      <void property="shipPart">
-       <object class="game.ShipPart" id="ShipPart14">
-        <void property="isUnshooted">
-         <boolean>true</boolean>
-        </void>
-        <void property="ship">
-         <object class="game.Ship" id="Ship5">
-          <void property="shipEndIndex">
-           <int>88</int>
-          </void>
-          <void property="shipParts">
-           <object class="java.util.ArrayList">
-            <void method="add">
-             <object idref="ShipPart14"/>
-            </void>
-            <void method="add">
-             <object class="game.ShipPart" id="ShipPart15">
-              <void property="isUnshooted">
-               <boolean>true</boolean>
-              </void>
-              <void property="ship">
-               <object idref="Ship5"/>
-              </void>
-              <void property="shipPartIndex">
-               <int>85</int>
-              </void>
-             </object>
-            </void>
-            <void method="add">
-             <object class="game.ShipPart" id="ShipPart16">
-              <void property="isUnshooted">
-               <boolean>true</boolean>
-              </void>
-              <void property="ship">
-               <object idref="Ship5"/>
-              </void>
-              <void property="shipPartIndex">
-               <int>86</int>
-              </void>
-             </object>
-            </void>
-            <void method="add">
-             <object class="game.ShipPart" id="ShipPart17">
-              <void property="isUnshooted">
-               <boolean>true</boolean>
-              </void>
-              <void property="ship">
-               <object idref="Ship5"/>
-              </void>
-              <void property="shipPartIndex">
-               <int>87</int>
-              </void>
-             </object>
-            </void>
-            <void method="add">
-             <object class="game.ShipPart" id="ShipPart18">
-              <void property="isUnshooted">
-               <boolean>true</boolean>
-              </void>
-              <void property="ship">
-               <object idref="Ship5"/>
-              </void>
-              <void property="shipPartIndex">
-               <int>88</int>
-              </void>
-             </object>
-            </void>
-           </object>
-          </void>
-          <void property="shipSize">
-           <int>5</int>
-          </void>
-          <void property="shipSizeDiff">
-           <int>4</int>
-          </void>
-          <void property="shipStartIndex">
-           <int>84</int>
-          </void>
-         </object>
-        </void>
-        <void property="shipPartIndex">
-         <int>84</int>
-        </void>
-       </object>
-      </void>
      </object>
     </void>
     <void method="add">
@@ -1006,18 +1035,12 @@
       <void property="cellIndex">
        <int>85</int>
       </void>
-      <void property="shipPart">
-       <object idref="ShipPart15"/>
-      </void>
      </object>
     </void>
     <void method="add">
      <object class="game.BoardCell">
       <void property="cellIndex">
        <int>86</int>
-      </void>
-      <void property="shipPart">
-       <object idref="ShipPart16"/>
       </void>
      </object>
     </void>
@@ -1027,7 +1050,7 @@
        <int>87</int>
       </void>
       <void property="shipPart">
-       <object idref="ShipPart17"/>
+       <object idref="ShipPart16"/>
       </void>
      </object>
     </void>
@@ -1035,9 +1058,6 @@
      <object class="game.BoardCell">
       <void property="cellIndex">
        <int>88</int>
-      </void>
-      <void property="shipPart">
-       <object idref="ShipPart18"/>
       </void>
      </object>
     </void>
@@ -1122,22 +1142,22 @@
   </void>
   <void property="ships">
    <void method="add">
+    <object idref="Ship4"/>
+   </void>
+   <void method="add">
+    <object idref="Ship5"/>
+   </void>
+   <void method="add">
     <object idref="Ship0"/>
+   </void>
+   <void method="add">
+    <object idref="Ship1"/>
    </void>
    <void method="add">
     <object idref="Ship2"/>
    </void>
    <void method="add">
     <object idref="Ship3"/>
-   </void>
-   <void method="add">
-    <object idref="Ship4"/>
-   </void>
-   <void method="add">
-    <object idref="Ship1"/>
-   </void>
-   <void method="add">
-    <object idref="Ship5"/>
    </void>
   </void>
  </object>

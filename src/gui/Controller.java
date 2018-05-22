@@ -85,7 +85,7 @@ public class Controller {
 			this.singlePlayer.updateMyBoardAfterShoot(this.singlePlayerBoard);
 			this.otherPlayer.updateEnemyBoardAfterShoot(this.singlePlayerBoard);
 			
-			this.singlePlayer.changeTextVisibility();
+			// this.singlePlayer.changeTextVisibility();
 
 			Thread gameThread = new Thread(this::playGame);
 			gameThread.start();
@@ -135,11 +135,15 @@ public class Controller {
 		this.otherBoard.prettyPrint();
 
 		this.singlePlayer.changeTextVisibility();
+		
+		if(this.gameType.equals(gameType.CLIENT)){
+			this.singlePlayer.changeText();
+		}
 
 		// Start shooting part
 		while (true) {
 			if (this.gameType.equals(GameType.CLIENT)) {
-				this.singlePlayer.changeText();
+				
 
 				// Server shoots
 				System.out.println("Waiting for other player to shoot");
