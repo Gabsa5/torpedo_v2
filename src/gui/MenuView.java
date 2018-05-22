@@ -21,6 +21,11 @@ import javafx.stage.Stage;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
+/**
+ * MenuView class for the main menu in the game.
+ * @author Gabsa5
+ *
+ */
 public class MenuView {
 	
 	protected VBox menuBox;
@@ -33,7 +38,10 @@ public class MenuView {
 	public MenuView(Stage s) {
 		this.s = s;
 	}
-	
+	/**
+	 * This class creates the content for the 
+	 * @return
+	 */
 	protected Parent createContent() {
 		Pane root = new Pane();
 		root.setPrefSize(800, 600);

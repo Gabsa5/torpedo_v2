@@ -359,7 +359,13 @@ public class NeuralNetwork {
 		
 		return shootIndex;
 	}
-
+	
+	/**
+	 * Converts Board to float array.
+	 * 
+	 * @param board Input Board.
+	 * @return Float array.
+	 */
 	private Float[] boardToAIBoard(Board board) {
 		Float[] aiBoard = new Float[board.getBoardSizeSQ()];
 
