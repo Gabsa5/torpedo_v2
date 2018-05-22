@@ -49,6 +49,11 @@ public class AIPlayer extends Player {
 	}
 
 	@Override
+	public void onGameOver() {
+		// Do nothing
+	}
+
+	@Override
 	public boolean isReadyWithPlaceShips() {
 		return true;
 	}

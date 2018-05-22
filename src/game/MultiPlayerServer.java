@@ -37,6 +37,11 @@ public class MultiPlayerServer extends Player {
 		this.networkServer.sendBoard(board);
 	}
 
+	@Override
+	public void onGameOver() {
+		this.networkServer.disconnect();
+	}
+
 	public void onBoardReceive(Board board) {
 		switch (this.stage) {
 			case SHIP_PLACEMENT:

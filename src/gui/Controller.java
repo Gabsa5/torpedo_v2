@@ -148,54 +148,50 @@ public class Controller {
 				// Server shoots
 				System.out.println("Waiting for other player to shoot");
 				this.otherPlayer.shoot(this.singlePlayerBoard);
+				if (checkGameOver()) {
+					return;
+				}
 				waitWhileShoot(this.otherPlayer);
 				this.singlePlayerBoard = this.otherPlayer.getEnemyBoard();
 				this.singlePlayer.updateMyBoardAfterShoot(this.singlePlayerBoard);
 				this.singlePlayer.changeText();
-				if (singlePlayer.getLife() == 0) {
-					this.singlePlayer.createEndButton(false);
-					break;
-				}
 
 				// Single player turn
 				System.out.println("Waiting for player to shoot");
 				this.singlePlayer.shoot(this.otherBoard);
+				if (checkGameOver()) {
+					return;
+				}
 				waitWhileShoot(this.singlePlayer);
 				this.otherBoard = this.singlePlayer.getEnemyBoard();
 				this.singlePlayer.updateEnemyBoardAfterShoot(this.otherBoard);
 				this.otherPlayer.updateMyBoardAfterShoot(this.otherBoard);
 				this.singlePlayer.changeText();
-				if (otherPlayer.getLife() == 0) {
-					this.singlePlayer.createEndButton(true);
-					break;
-				}
 
 			} else {
 				// Single player turn
 				System.out.println("Waiting for player to shoot");
 				this.singlePlayer.shoot(this.otherBoard);
+				if (checkGameOver()) {
+					return;
+				}
 				waitWhileShoot(this.singlePlayer);
 				this.otherBoard = this.singlePlayer.getEnemyBoard();
 				this.singlePlayer.updateEnemyBoardAfterShoot(this.otherBoard);
 				this.otherPlayer.updateMyBoardAfterShoot(this.otherBoard);
 				this.singlePlayer.changeText();
-				if (otherPlayer.getLife() == 0) {
-					this.singlePlayer.createEndButton(true);
-					break;
-				}
 
 				// Other player turn
 				System.out.println("Waiting for other player to shoot");
 				this.otherPlayer.shoot(this.singlePlayerBoard);
+				if (checkGameOver()) {
+					return;
+				}
 				waitWhileShoot(this.otherPlayer);
 				this.singlePlayerBoard = this.otherPlayer.getEnemyBoard();
 				this.singlePlayer.updateMyBoardAfterShoot(this.singlePlayerBoard);
 //				this.otherPlayer.updateEnemyBoardAfterShoot(this.singlePlayerBoard);
 				this.singlePlayer.changeText();
-				if (singlePlayer.getLife() == 0) {
-					this.singlePlayer.createEndButton(false);
-					break;
-				}
 			}
 
 			System.out.println("Single Player Board:");
@@ -233,6 +229,26 @@ public class Controller {
 				e.printStackTrace();
 			}
 		}
+	}
+
+	/**
+	 * Checks whether the game is over
+	 * In case the game is over, shows button on the view and returns true
+	 * If the both players have life, returns false
+	 * @return True if game is over
+	 */
+	private boolean checkGameOver() {
+		boolean singlePlayerWon = otherPlayer.getLife() == 0;
+		boolean otherPlayerWon = singlePlayer.getLife() == 0;
+
+		if (singlePlayerWon || otherPlayerWon) {
+			this.singlePlayer.createEndButton(singlePlayerWon);
+			this.singlePlayer.onGameOver();
+			this.otherPlayer.onGameOver();
+			return true;
+		}
+
+		return false;
 	}
 	
 

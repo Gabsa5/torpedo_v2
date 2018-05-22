@@ -24,12 +24,19 @@ public class MultiPlayerClient extends Player {
 
 	@Override
 	public void updateMyBoardAfterShoot(Board board) {
+		this.myBoard = board;
 		this.networkClient.sendBoard(board);
 	}
 
 	@Override
 	public void updateEnemyBoardAfterShoot(Board board) {
+		this.enemyBoard = board;
 		this.networkClient.sendBoard(board);
+	}
+
+	@Override
+	public void onGameOver() {
+		this.networkClient.disconnect();
 	}
 
 	public void onBoardReceive(Board board) {

@@ -52,6 +52,11 @@ public class SinglePlayer extends Player {
 		this.enemyBoard = board;
 	}
 
+	@Override
+	public void onGameOver() {
+		// Do nothing
+	}
+
 	public void afterShipSelection(ArrayList<Ship> ships) {
 		for (Ship ship: ships) {
 			myBoard.addShip(ship.getShipStartIndex(), ship.getShipEndIndex());

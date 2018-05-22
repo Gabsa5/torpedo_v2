@@ -1,15 +1,16 @@
 package game;
 
 public abstract class Player {
-	protected Board myBoard;
-	protected Board enemyBoard;
-	protected boolean readyWithShipPlacement = false;
-	protected boolean readyWithShoot = false;
+	Board myBoard;
+	Board enemyBoard;
+	boolean readyWithShipPlacement = false;
+	boolean readyWithShoot = false;
 
 	public abstract void placeShips(Board board);
 	public abstract void shoot(Board board);
 	public abstract void updateMyBoardAfterShoot(Board board);
 	public abstract void updateEnemyBoardAfterShoot(Board board);
+	public abstract void onGameOver();
 
 	public Board getMyBoard() {
 		return myBoard;
