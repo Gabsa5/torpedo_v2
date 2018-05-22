@@ -1,22 +1,57 @@
 package game;
 
 import java.io.Serializable;
+
 import java.util.ArrayList;
+
+/**
+ * This class determines the Board of the game.
+ * The Board is written according to JavaBeans standard
+ * 
+ * @author Peter Lindner
+ * @version 1.0
+ */
 
 public class Board implements Serializable {
 
-	//Properties of Board class
-	private int boardSize;
-	private int boardSizeSQ;
-	private ArrayList<BoardCell> cells;
-	private ArrayList<Ship> ships = new ArrayList<>();
-	private boolean shotSuccessful;
 	
+	
+	/**
+	 *  boardSize: Property of the Board, integer value, determines the size of the Board. The Board surface is always n x n
+	 *  where n is equal with the boardSize
+	 */
+	private int boardSize;
+	/**
+	 *  boardSizeSQ: Property of the Board, integer value, it is calculated from the boardSize
+	 *  <p> boardSizeSQ = boardSize * boardSize
+	 */
+	private int boardSizeSQ;
+	
+	/**
+	 *  cells: Property of the Board, ArrayList<BoardCell>, determines the cells of the Board.
+	 *  @see BoardCell
+	 */
+	private ArrayList<BoardCell> cells;
+	/**
+	 *  ships: Property of the Board, ArrayList<Ship>, defines the ships of the Board.
+	 *  @see Ship
+	 */
+	private ArrayList<Ship> ships = new ArrayList<>();
+	/**
+	 * shotSuccesful: Property of the Board, boolean value, it is true if the shoot hits a cell and false if it misses one
+	 */
+	private boolean shotSuccessful;
+	/**
+	 * Empty Constructor of the Board
+	 */
 	public Board() {
 		
 	}
 
-	//Constructor
+	/**
+	 * Contructor of the Board with an integer parameter
+	 * @param boardSize: determines the size of the Board
+	 */
 	public Board(int boardSize) {
 		this.boardSize = boardSize;
 		this.boardSizeSQ = this.boardSize * this.boardSize;
@@ -26,7 +61,10 @@ public class Board implements Serializable {
 
 	}
 
-	//Initialize the cells of the board
+	/**
+	 * Initialize the cell of the boards.
+	 * <p> Create a new ArrayList of BoardCell and add elements with default values.
+	 */
 	private void initializeCells() {
 		this.cells = new ArrayList<>();
 		for (int i = 0; i < this.boardSizeSQ; i++) {
@@ -34,7 +72,13 @@ public class Board implements Serializable {
 		}
 	}
 
-	//Add ship to the board
+	/**
+	 * Add Ships to the Board by calling the constructor of the Ship then set the ShipParts of the Ship and connects the ShipPart with the BoardCell
+	 * @see Ship
+	 * @see ShipPart
+	 * @see BoardCell
+	 */
+	
 	public void addShip(int shipStartIndex, int shipEndIndex) {
 		Ship actualShip = new Ship(shipStartIndex, shipEndIndex);
 		ships.add(actualShip);
@@ -44,6 +88,12 @@ public class Board implements Serializable {
 			actualCell.setShipPart(shipPart);
 		}
 	}
+	
+	/**
+	 * Returns with a boolean value, if the index where the player shooted is already shooted then it returns with false, 
+	 * else it examines wether there is a Ship in the cell and set the shotSuccesful parameter to true or false and the isUnshooted parameter is set 
+	 * to false, then it returns with a true value
+	 */
 
 	public boolean shootShip(int cellIndex) {
 		System.out.println("Lövés: " + cellIndex);
@@ -65,10 +115,20 @@ public class Board implements Serializable {
 		return true;
 	}
 
+	/**
+	 * It print out the Board to the console in a coded view
+	 */
 	public void prettyPrint() {
 		System.out.println(this.toString());
 	}
 
+	/**
+	 * It creates a String where the characters have a meaning
+	 * <p> 0: If the cell is empty and not shooted //
+	 * X: If the cell is not empty and shooted //
+	 * U: If the cell is empty and not shooted //
+	 * n: If the cell is not empty and not shooted, where n is the size of the actual Shipe in that cell 
+	 */
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -91,12 +151,11 @@ public class Board implements Serializable {
 		return builder.toString();
 	}
 
-	//Getter for boardSize
+
 	public int getBoardSize() {
 		return boardSize;
 	}
 
-	//Getter for boardSizeSQ
 	public int getBoardSizeSQ() {
 		return boardSizeSQ;
 	}

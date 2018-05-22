@@ -5,6 +5,12 @@ import java.util.Random;
 import game.Board;
 import game.Ship;
 
+/**
+ * This class contains the AI's board and makes the random ship placement. It can be used for testing the AI.
+ * 
+ * @author Albert Gregus
+ * @version 1.0
+ */
 public class BattleshipAI {
 	private Random rand = new Random();
 	private Board board;
@@ -15,6 +21,11 @@ public class BattleshipAI {
 		boardArray = new int[board.getBoardSizeSQ()];
 	}
 
+	/**
+	 * This function makes a random ship placement of the ship size into the class board. 
+	 * 
+	 * @param shipSize Size of the ship to be placed.
+	 */	
 	public void addRandomShip(int shipSize) {
 		boolean direct = rand.nextBoolean();
 		int tryNumber = 0;
@@ -51,6 +62,12 @@ public class BattleshipAI {
 
 	}
 
+	/**
+	 * Gives number of the nonzero cells.
+	 * 
+	 * @param table Input array.
+	 * @return Number of the nonzero cells.
+	 */
 	private int nonZeroNum(int[] table) {
 		int nonzeroNum = 0;
 		for (int element : table) {
@@ -61,6 +78,11 @@ public class BattleshipAI {
 		return nonzeroNum;
 	}
 
+	/**
+	 * Gives the number of the nonzero cells of the class' board.
+	 * 
+	 * @return Number of nonzero cells.
+	 */
 	private int nonZeroNum() {
 		int nonzeroNum = 0;
 		for (int element : this.boardArray) {

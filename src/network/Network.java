@@ -11,7 +11,7 @@ public abstract class Network {
 	protected Socket socket = null;
 	protected ObjectOutputStream out = null;
 	protected ObjectInputStream in = null;
-	protected static final int PORT = 2524;
+	protected static final int PORT = 2266;
 
 	public abstract void connect();
 
